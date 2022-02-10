@@ -1,0 +1,106 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import MetaTags from 'react-meta-tags';
+import Header from '../global/Header';
+import { Link } from 'react-router-dom';
+import Footer from '../global/Footer';
+
+
+
+
+const useStyles = makeStyles((theme) => ({
+
+  item: {
+    maxWidth: 400,
+    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(4),
+    minHeight: 330,
+    height: '94%'
+  },
+
+  items: {
+    paddingTop: theme.spacing(20),
+  },
+
+  media: {
+    height: 0,
+    paddingTop: '56.25%',
+    
+  },
+  cardDescription: {
+    paddingTop: theme.spacing(2)
+  },
+  cardTitle: {
+    paddingTop: theme.spacing(2)
+  },
+  cardButtonArea: {
+    paddingTop: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+  }
+
+}));
+
+const Portfolio = ({apiData}) => {
+  
+  const classes = useStyles();
+  return(
+    <>
+    <Header />
+    <Container maxWidth='xl'>
+      <MetaTags>
+            <title>Portfolio Projects | Ashley The Web Developer</title>
+            <meta name="description" content='Check out the projects that I have created. From full web apps to...' />
+            <meta property="og:title" content='Portfolio Projects | Ashley The Web Developer' />
+            {/* <meta property="og:image" content="path/to/image.jpg" /> */}
+      </MetaTags>
+      <Grid container spacing={4} justify='center' className={classes.items}>
+        {apiData.map((apiData) => {
+          return(
+            <Grid item key={apiData.projectName} xs={12} md={6} lg={4} align='center'>
+              <Card raised className={classes.item}> 
+              
+              <CardActionArea component={ Link } to={'portfolio/'+ apiData.projectName}>
+              <CardMedia
+                  className={classes.media}
+                  image={apiData.projectThumbnail}
+                  title="Contemplative Reptile"
+                />
+                
+                <CardContent>
+                  <Typography variant='h6' align='left' className={classes.cardTitle}>
+                    {apiData.projectName}
+                  </Typography>
+                  <Typography variant='body1' align='left' className={classes.cardDescription}>
+                  {apiData.projectDescription}
+                </Typography>
+              </CardContent>
+              </CardActionArea>
+              <CardActions className={classes.cardButtonArea}>
+              <Button size="small" variant='contained' color="primary" component={Link} to={'portfolio/'+ apiData.projectName}>
+                  Learn More
+                </Button>
+                </CardActions>
+                
+
+
+            </Card>
+          </Grid>
+        )})};
+      </Grid>
+      <Footer/>
+   </Container>
+   </>
+
+  );
+};
+
+export default Portfolio
