@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const ContactForm = ({setLoading, loading}) => {
+const ContactForm = ({ setLoading, loading }) => {
 
     const history = useHistory();
 
@@ -34,42 +34,44 @@ const ContactForm = ({setLoading, loading}) => {
         email: '',
         message: '',
     });
-    
-    const [formData, updateFormData] = useState(initalFormData)
 
-    
-    const handleChange = (e) => {
+    const [formData, updateFormData] = useState(initalFormData);
+
+
+    const handleFormChange = (e) => {
         updateFormData({
-          ...formData,
-          [e.target.name]: e.target.value.trim(),
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
         });
-      };
+    };
 
-      const formSubmit = (e) => {
-    
-        e.preventDefault()
-        setLoading({...loading, isLoading: true});
-        
-    
-      axiosInstance.post('contact-message/', {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        message: formData.message
-      })
-      .then(() => {
-        setLoading({...loading, isLoading: true})
-          history.push('/thank-you')
-      })
-        
-   }
-    
+
+    const handleFormSubmit = (e) => {
+
+        e.preventDefault();
+
+        setLoading({ ...loading, isLoading: true });
+
+
+        axiosInstance.post('contact-message/', {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            email: formData.email,
+            message: formData.message
+        })
+            .then(() => {
+                setLoading({ ...loading, isLoading: false })
+                history.push('/thank-you')
+            })
+
+    }
+
 
     const classes = useStyles();
-    return (
-        <form className={classes.contactForm} name="contactForm" onChange={handleChange} onSubmit={formSubmit} noValidate>
-            <Grid container justify='center' spacing={2} className={classes.formContainer}>
 
+    return (
+        <form className={classes.contactForm} name="contactForm" onChange={handleFormChange} onSubmit={handleFormSubmit}>
+            <Grid container justify='center' spacing={2} className={classes.formContainer}>
                 <Grid item xs={11} sm={8} lg={4}>
                     <TextField
                         className={classes.formFields}
