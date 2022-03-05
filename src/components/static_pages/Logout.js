@@ -16,16 +16,16 @@ const Logout = () => {
   const isLoggedIn = Cookies.get('is-logged-in');
 console.log(isLoggedIn)
   if (isLoggedIn === 'false') {
-    history.push('/login')
+    history.push('')
   } else {
 
 
     axiosInstance.post('auth/blacklist-token/', {}, { withCredentials: true })
       .then((res) => {
-        history.push('/login')
+        history.push('')
       })
       .catch((err) => {
-        history.push('/login')
+        history.push('')
       })
 }
     return (

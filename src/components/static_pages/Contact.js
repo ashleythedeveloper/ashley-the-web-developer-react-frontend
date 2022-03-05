@@ -53,7 +53,7 @@ const Contact = () => {
                     </Grid>
                     <Grid item xs={12}>
                         <Typography align="center" className={classes.contactText}>
-                            Fill out the contact form below <br />and we will be in touch within 24-48 hours.
+                            Fill out the contact form below <br />and I will be in touch within 24-48 hours.
                         </Typography>
                     </Grid>
                 </Grid>
