@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom';
 import axiosInstance from '../global/axiosInstance';
 import Header from '../global/Header';
@@ -11,42 +12,30 @@ const Logout = () => {
   // Initialise the default loading state
   const defaultLoadingState = { isLoading: false, loadingMessage: 'Logging you out. One moment.' }
 
-  // Initialise a state variable to controll the loading screen.
-  const [loading, setLoading] = useState(defaultLoadingState);
+
+  const isLoggedIn = Cookies.get('is-logged-in');
+console.log(isLoggedIn)
+  if (isLoggedIn === 'false') {
+    history.push('/login')
+  } else {
 
 
-  useEffect(() => {
-    setLoading({...loading, isLoading: true});
     axiosInstance.post('auth/blacklist-token/', {}, { withCredentials: true })
       .then((res) => {
-        setLoading(defaultLoadingState);
         history.push('/login')
       })
       .catch((err) => {
-        setLoading(defaultLoadingState);
-        history.push('/login', {
-          notification: {
-            notificationType: 'error',
-            notificationTitle: '',
-            notificationMessage: "You're already logged out.",
-            notificationTimer: null
-          }
-        })
+        history.push('/login')
       })
-  });
-  if (loading.isLoading) {
+}
     return (
       <>
-        <Header isUserLoggedIn={false} isLoading={false}/>
-        <Loader message={loading.loadingMessage} />
+        <Header />
+        <Loader message={defaultLoadingState.loadingMessage} />
       </>
     )
-  } else {
-    return (
-      <>
-      </>
-    )
-  }
+  
+  
 }
 
 export default Logout
