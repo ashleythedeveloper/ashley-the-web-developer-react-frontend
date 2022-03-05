@@ -8,18 +8,23 @@ const Logout = () => {
 
   useEffect(() => {
     
-    axiosInstance.post('user/logout/blacklist/', {
-      refresh_token: localStorage.getItem('refresh_token'),
-    });
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('refresh_token')
-    axiosInstance.defaults.headers['Authorization'] = null;
-    history.push('/login')
+    axiosInstance.post('auth/blacklist-token/', {}, {withCredentials:true})
+    .then((res) => {
+      history.push('/login')
+    })
+    .catch((err) => {
+      history.push('/login', {
+        notification: {
+          notificationType: 'error',
+          notificationTitle: '',
+          notificationMessage: "You're already logged out.",
+          notificationTimer: null
+        }})
+    })
     });
   return (
-    <div>
-      Logout
-    </div>
+    <>
+    </>
   )
 }
 

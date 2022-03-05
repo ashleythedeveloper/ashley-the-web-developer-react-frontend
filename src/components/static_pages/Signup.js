@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Link } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
@@ -130,7 +129,7 @@ const Signup = () => {
               notification: {
                 notificationType: 'success',
                 notificationTitle: '',
-                notificationMessage: "Your account has been successfully created.",
+                notificationMessage: "Your account has been successfully created. Please login below.",
                 notificationTimer: null
               }
             });

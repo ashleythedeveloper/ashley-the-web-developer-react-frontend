@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axiosInstance from './components/global/axiosInstance';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
@@ -22,6 +23,7 @@ import TextEditor from './components/global/TextEditor';
 
 const ga4react = new GA4React("G-CDFRJQR56Q");
 
+
 (async () => {
   await ga4react.initialize();
 
@@ -31,7 +33,6 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
       <Router>
         <Switch>
           <Route path="/" exact>
-            <Header />
             <HomePage />
           </Route>
           <Route path="/editor" exact>
@@ -39,7 +40,6 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <TextEditor />
           </Route>
           <Route  path="/login" exact>
-            <Header />
             <Login />
           </Route>
           <Route path="/logout" exact>
@@ -76,7 +76,6 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
     <Router>
         <Switch>
           <Route path="/" exact>
-            <Header />
             <HomePage />
           </Route>
           <Route path="/editor" exact>
@@ -84,7 +83,6 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <TextEditor />
           </Route>
           <Route  path="/login" exact>
-            <Header />
             <Login />
           </Route>
           <Route path="/logout" exact>

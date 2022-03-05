@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axiosInstance from '../global/axiosInstance';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,9 @@ import { Divider } from '@material-ui/core';
 import MetaTags from 'react-meta-tags';
 import Schema from '../global/Schema';
 import Footer from '../global/Footer';
+import Header from '../global/Header';
+import isUserLoggedIn from '../global/isUserLoggedIn';
+import IsUserLoggedIn from '../global/isUserLoggedIn';
 
 
 
@@ -266,16 +270,15 @@ const markup = {
 
 
 const HomePage = () => {
-    // Declare the variable " userOnline " and set it to the value " false "
-    let userOnline = false;
-
-    // A tunary operator that will print " User is online " if the variable " userOnline " is true else it will print " User is offline " to the browser's console
-    userOnline ? console.log("User is online") : console.log("User is offline")
 
     const classes = useStyles();
 
+
     return (
         <React.Fragment>
+            <IsUserLoggedIn>
+            <Header />
+            </IsUserLoggedIn>
             <MetaTags>
                 <title>{pageData.title}</title>
                 <meta name="description" content={pageData.description} />
@@ -298,7 +301,7 @@ const HomePage = () => {
                         </Typography>
                     </Grid>
                     <div className={classes.heroButtons}>
-                        <Grid container spacing={2} justify="flex-start">
+                        <Grid container spacing={2} justifyContent="flex-start">
                             <Grid item>
                                 <Button component={Link} to="/contact" variant="contained" color="primary">
                                     Build my Project
@@ -318,7 +321,7 @@ const HomePage = () => {
             {/* ---------------Section 2 --------------------------- */}
 
             <div className={classes.automationDiv}>
-                <Grid container className={classes.automationContainer} alignItems="center" justify="space-evenly">
+                <Grid container className={classes.automationContainer} alignItems="center" justifyContent="space-evenly">
                     <Grid item xs={11} sm={7} md={5} lg={3} xl={3} className={classes.automationCardItem}>
                         <Card raised={true}>
                             <Grid container spacing={2} className={classes.automationCardContainer}>
@@ -382,7 +385,7 @@ const HomePage = () => {
             {/* ---------------Section 3 --------------------------- */}
 
             <div className={classes.webDevelopmentDiv}>
-                <Grid container className={classes.webDevelopmentContainer} justify="space-evenly">
+                <Grid container className={classes.webDevelopmentContainer} justifyContent="space-evenly">
                     <Grid item xs={10} lg={4} className={classes.webDevelopmentCopyDiv}>
                         <Grid container spacing={2} className={classes.webDevelopmentCopyContainer}>
                             <Grid item xs={12}>
@@ -435,7 +438,7 @@ const HomePage = () => {
                     </Grid>
                 </Grid>
                 <div className={classes.mainContentP1Content}>
-                    <Grid container spacing={7} justify='center' className={classes.gg}>
+                    <Grid container spacing={7} justifyContent='center' className={classes.gg}>
                         <Grid item xs={10} sm={9} md={4}>
                             <Card raised={true} className={classes.card}>
                                 <CardActionArea>
@@ -514,10 +517,10 @@ const HomePage = () => {
                         </Grid>
                     </Grid>
                 </div>
-                
+
             </Container>
             <Footer />
-            
+
         </React.Fragment>
 
 

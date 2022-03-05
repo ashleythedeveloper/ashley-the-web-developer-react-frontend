@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -93,10 +93,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Header = () => {
+const Header = ({isUserLoggedIn, isLoading}) => {
   const classes = useStyles();
 
   const [drawState, setDrawState] = useState(false);
+
+  const [loading, setloading] = useState(isLoading)
+
+  const [isLoggedIn, setIsLoggedIn] = useState(isUserLoggedIn)
+
   const handleDrawOpen = () => {
     setDrawState(true);
   };
@@ -104,11 +109,15 @@ const Header = () => {
   const handleDrawClose = () =>{
     setDrawState(false);
   };
-  
+  useEffect(() => {
+    setIsLoggedIn(isUserLoggedIn)
+    setloading(isLoading)
+  }, [isUserLoggedIn, isLoading])
 
   let desktop;
   let mobile;
-  if (!localStorage.getItem("access_token")){
+
+  if (!isLoggedIn){
     
     desktop=
       <>
@@ -148,7 +157,12 @@ const Header = () => {
             </ListItem>
     </>
     };
-
+    if (loading) {
+      return (
+        <>
+        </>
+      )
+    } else {
   return (
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -241,6 +255,11 @@ const Header = () => {
           </Drawer>
       </Toolbar>
     </AppBar>
-  );
+  )}
 };
+
+Header.defaultProps = {
+  isUserLoggedIn : false
+}
+
 export default Header;
