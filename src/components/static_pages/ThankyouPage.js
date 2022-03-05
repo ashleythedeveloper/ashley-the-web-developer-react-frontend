@@ -37,9 +37,9 @@ const ThankyouPage = () => {
               </MetaTags>
             <Grid container align='center' spacing={2}>
                 <Grid item xs={12}>
-                    <Typography variant='h4' component='h2' className={classes.text}>
+                    <Typography variant='h5' component='h2' className={classes.text}>
                         Thank you for reacing out!<br/> <br/>
-                        We have recived your details and will be in contact <br />within 24-48 hours
+                        I will be in contact with you <br />within 24-48 hours.
                         <br /><br />
                     </Typography>
                 </Grid>
