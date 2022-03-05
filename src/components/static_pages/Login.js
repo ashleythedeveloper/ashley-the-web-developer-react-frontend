@@ -147,7 +147,7 @@ const Login = () => {
           }
         })
     };
-
+console.log('Login')
     const classes = useStyles();
     if(loading.isLoading) {
       return (
