@@ -130,14 +130,7 @@ const Login = () => {
         password: formData.password,
       })
         .then((res) => {
-          localStorage.setItem('access_token', res.data.access);
-          localStorage.setItem('refresh_token', res.data.refresh);
-          axiosInstance.defaults.headers['Authorization'] =
-            "JWT " + localStorage.getItem("access_token");
           history.push('');
-
-
-
         })
         .catch((err) => {
 
@@ -152,7 +145,6 @@ const Login = () => {
           }
         })
     };
-console.log('Login')
     const classes = useStyles();
     if(loading.isLoading) {
       return (
