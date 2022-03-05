@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Header from '../global/Header';
-import Axios2 from '../global/Axios2';
 import Blogposts2 from './BlogPosts2';
 import Footer from '../global/Footer';
 
@@ -50,7 +49,6 @@ const BlogPost = ({match, endpoint}) => {
       <Header />
     <Container maxWidth='xl'>
       <div className={classes.containers}>
-      <Axios2 match={match} endpoint={endpoint} component={Blogposts2}/>
       </div>
    </Container>
    </>
