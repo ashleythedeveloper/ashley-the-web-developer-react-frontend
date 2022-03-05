@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +20,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import Cookies from 'js-cookie';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -92,14 +93,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Header = ({isUserLoggedIn, isLoading}) => {
+const Header = () => {
   const classes = useStyles();
 
   const [drawState, setDrawState] = useState(false);
 
-  const [loading, setloading] = useState(isLoading)
-
-  const [isLoggedIn, setIsLoggedIn] = useState(isUserLoggedIn)
+  const [isLoggedIn, setIsLoggedIn] = useState(Cookies.get('is-logged-in'))
 
   const handleDrawOpen = () => {
     setDrawState(true);
@@ -108,11 +107,7 @@ const Header = ({isUserLoggedIn, isLoading}) => {
   const handleDrawClose = () =>{
     setDrawState(false);
   };
-  useEffect(() => {
-    setIsLoggedIn(isUserLoggedIn)
-    setloading(isLoading)
-  }, [isUserLoggedIn, isLoading])
-
+  
   let desktop;
   let mobile;
 
