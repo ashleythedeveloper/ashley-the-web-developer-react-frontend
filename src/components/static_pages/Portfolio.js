@@ -63,14 +63,13 @@ const Portfolio = () => {
 
   useEffect(() => {
     axiosInstance.get('projects/')
-    .then((res) => {
-      setProjects(res.data)
-      setLoading({...loading, isLoading: false})
-    })
-    .catch((err) => {
-      setLoading({...loading, isLoading: false})
-    })
-    
+      .then((res) => {
+        setProjects(res.data)
+        setLoading({ ...loading, isLoading: false })
+      })
+      .catch((err) => {
+        setLoading({ ...loading, isLoading: false })
+      })
   }, [])
 
   if (loading.isLoading) {
@@ -91,19 +90,17 @@ const Portfolio = () => {
             <meta property="og:title" content='Portfolio Projects | Ashley The Web Developer' />
             {/* <meta property="og:image" content="path/to/image.jpg" /> */}
           </MetaTags>
-          <Grid container spacing={4} justify='center' className={classes.items}>
+          <Grid container spacing={4} justifyContent='center' className={classes.items}>
             {projects.map((apiData) => {
               return (
-                <Grid item key={apiData.projectName} xs={12} md={6} lg={4} align='center'>
+                <Grid item key={apiData.project_title} xs={12} md={6} lg={4} align='center'>
                   <Card raised className={classes.item}>
-
                     <CardActionArea component={Link} to={'portfolio/' + apiData.slug}>
                       <CardMedia
                         className={classes.media}
                         image={apiData.main_project_image}
                         title={apiData.project_title}
                       />
-
                       <CardContent>
                         <Typography variant='h6' align='left' className={classes.cardTitle}>
                           {apiData.project_title}
@@ -118,18 +115,14 @@ const Portfolio = () => {
                         Learn More
                 </Button>
                     </CardActions>
-
-
-
                   </Card>
                 </Grid>
               )
             })}
-      </Grid>
+          </Grid>
           <Footer />
         </Container>
       </>
-
     );
   }
 };

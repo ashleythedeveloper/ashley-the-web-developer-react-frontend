@@ -11,6 +11,7 @@ import Header from '../global/Header';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Footer from '../global/Footer';
+import {useParams} from 'react-router-dom';
 
 
 
@@ -99,7 +100,12 @@ function getModalStyle() {
     };
   }
 
-const PortfolioProject = (apiData) => {
+const PortfolioProject = ({apiData}) => {
+
+    const {project} = useParams();
+
+    console.log(project)
+
     const pageData = {
         title: "Ashley The Web Developer | Portfolio Project | " + apiData.apiData.prj[0].projectName,
         description: apiData.apiData.prj[0].projectDescription,
