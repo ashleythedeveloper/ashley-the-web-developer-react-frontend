@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -13,6 +13,7 @@ import MetaTags from 'react-meta-tags';
 import Header from '../global/Header';
 import { Link } from 'react-router-dom';
 import Footer from '../global/Footer';
+import Loader from '../global/Loader';
 
 
 
@@ -51,7 +52,20 @@ const useStyles = makeStyles((theme) => ({
 
 const Portfolio = ({apiData}) => {
   
+  const defaultLoadingState = {isLoading: true, loadingMessage: "Fetching projects. One moment."};
+
+  const [loading, setLoading] = useState(defaultLoadingState)
+
   const classes = useStyles();
+
+  if (loading.isLoading) {
+    return (
+      <>
+      <Header />
+    <Loader message={loading.loadingMessage} />
+    </>
+    )
+  } else {
   return(
     <>
     <Header />
@@ -101,6 +115,7 @@ const Portfolio = ({apiData}) => {
    </>
 
   );
+          }
 };
 
 export default Portfolio
