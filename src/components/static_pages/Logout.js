@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axiosInstance from '../global/axiosInstance';
+import Header from '../global/Header';
 import Loader from '../global/Loader';
 
 
@@ -36,6 +37,7 @@ const Logout = () => {
   if (loading.isLoading) {
     return (
       <>
+        <Header isUserLoggedIn={false} isLoading={false}/>
         <Loader message={loading.loadingMessage} />
       </>
     )

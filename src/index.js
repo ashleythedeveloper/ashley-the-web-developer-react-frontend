@@ -41,11 +41,9 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <Login />
           </Route>
           <Route path="/logout" exact>
-            <Header />
             <Logout />
           </Route>
           <Route  path="/signup" exact>
-            <Header />
             <Signup />
           </Route>
           <Route path="/contact" exact>
@@ -94,11 +92,9 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <Login />
           </Route>
           <Route path="/logout" exact>
-            <Header />
             <Logout />
           </Route>
           <Route  path="/signup" exact>
-            <Header />
             <Signup />
           </Route>
           <Route path="/contact" exact>
