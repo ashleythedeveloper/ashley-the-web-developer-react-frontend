@@ -82,6 +82,7 @@ const ContactForm = ({ setLoading, loading }) => {
                         label="First Name"
                         id="firstName"
                         autoComplete="given-name"
+                        value={formData.firstName}
                         autoFocus
                     />
                 </Grid>
@@ -94,6 +95,7 @@ const ContactForm = ({ setLoading, loading }) => {
                         name="lastName"
                         label="Last Name"
                         id="lastName"
+                        value={formData.lastName}
                         autoComplete="family-name"
                     />
                 </Grid>
@@ -107,6 +109,7 @@ const ContactForm = ({ setLoading, loading }) => {
                         name="email"
                         label="Email"
                         id="email"
+                        value={formData.email}
                         autoComplete="email"
                     />
                 </Grid>
@@ -121,6 +124,7 @@ const ContactForm = ({ setLoading, loading }) => {
                         name="message"
                         label="Message"
                         id="message"
+                        value={formData.message}
                     />
                 </Grid>
                 <Grid item xs={11} sm={8} lg={8}>
