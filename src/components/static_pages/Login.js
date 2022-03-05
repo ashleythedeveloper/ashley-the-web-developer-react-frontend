@@ -15,7 +15,6 @@ import Footer from '../global/Footer';
 import Loader from '../global/Loader';
 import NotificationAlert from '../global/NotificationAlert';
 import Header from '../global/Header';
-import IsUserLoggedIn from '../global/isUserLoggedIn';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -77,8 +76,9 @@ const Login = () => {
     notificationMessage: '',
     notificationTimer: 0
   }
-  const successNotificationState = location.state ? location.state.notifications : {}
-  
+  const successNotificationState = location.state ? location.state.notification : defaultNotificationState
+ 
+  console.log(location.state)
   // Used to store success and error messages
   const [notifications, setNotifications] = useState(hasShowSuccessNotification ? defaultNotificationState : successNotificationState);
 
@@ -101,10 +101,15 @@ const Login = () => {
     // Set all of the values to the corrisponding keys that handle the error fields to false.
     setFormFieldErrors(defaultFormFieldErrorState);
   };
-
+  console.log(notifications)
     // Set the messageAlert variable to a ternary statment that will control if the alert box will be displayed or not.
     // If the message state variable is empty show nothing, else display the NotificationAlert component along with the relvent message.
-    let notificationAlertBox = notifications.notificationMessage ? <NotificationAlert alertType={notifications.notificationType} alertTitle={notifications.notificationTitle} alertMessage={notifications.notificationMessage} alertCloseCallback={closeNotificationAlertBox} notificationTimer={notifications.notificationTimer}/> : ''
+    let notificationAlertBox = notifications.notificationMessage ? <NotificationAlert 
+      alertType={notifications.notificationType} 
+      alertTitle={notifications.notificationTitle} 
+      alertMessage={notifications.notificationMessage} 
+      alertCloseCallback={closeNotificationAlertBox} 
+      notificationTimer={notifications.notificationTimer}/> : ''
 
 
     const handleFormChange = (e) => {
@@ -156,9 +161,7 @@ console.log('Login')
     } else {
     return (
       <>
-      <IsUserLoggedIn>
             <Header />
-            </IsUserLoggedIn>
         <Container component="main" maxWidth="xs">
           <MetaTags>
             <title>Login | Ashley The Web Developer</title>
