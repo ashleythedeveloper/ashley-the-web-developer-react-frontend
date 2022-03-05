@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import axiosInstance from './components/global/axiosInstance';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
-import reportWebVitals from './reportWebVitals';
 import Header from './components/global/Header';
 import Login from './components/static_pages/Login';
 import Logout from './components/static_pages/Logout';
