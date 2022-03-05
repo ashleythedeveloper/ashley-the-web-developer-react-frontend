@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import axiosInstance from '../global/axiosInstance';
-import LoadingScreen from '..//global/LoadingScreen';
 
 
 
@@ -24,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const ContactForm = () => {
+const ContactForm = ({setLoading, loading}) => {
 
-    const history = useHistory()
+    const history = useHistory();
+
+
     const initalFormData = Object.freeze({
         firstName: '',
         lastName: '',
@@ -35,7 +36,6 @@ const ContactForm = () => {
     });
     
     const [formData, updateFormData] = useState(initalFormData)
-    const [isLoading, setIsLoading] = useState(false)
 
     
     const handleChange = (e) => {
@@ -44,11 +44,11 @@ const ContactForm = () => {
           [e.target.name]: e.target.value.trim(),
         });
       };
-    const ApiLoading = LoadingScreen();
-    const formSubmit = (e) => {
+
+      const formSubmit = (e) => {
     
         e.preventDefault()
-        setIsLoading(true);
+        setLoading({...loading, isLoading: true});
         
     
       axiosInstance.post('contact-message/', {
@@ -58,7 +58,7 @@ const ContactForm = () => {
         message: formData.message
       })
       .then(() => {
-          setIsLoading(false)
+        setLoading({...loading, isLoading: true})
           history.push('/thank-you')
       })
         
@@ -66,14 +66,6 @@ const ContactForm = () => {
     
 
     const classes = useStyles();
-    if (isLoading)
-        return(
-            
-                <React.Fragment>
-                    <ApiLoading text={'Sending Message'} isLoading={isLoading}/>
-                </React.Fragment>
-                
-        )
     return (
         <form className={classes.contactForm} name="contactForm" onChange={handleChange} onSubmit={formSubmit} noValidate>
             <Grid container justify='center' spacing={2} className={classes.formContainer}>
@@ -139,8 +131,6 @@ const ContactForm = () => {
             </Grid>
         </form>
     )
-
-
 };
 
 export default ContactForm

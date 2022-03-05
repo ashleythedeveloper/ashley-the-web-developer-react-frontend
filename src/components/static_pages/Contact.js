@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -6,6 +6,7 @@ import Container from '@material-ui/core/Container';
 import ContactForm from '../global/ContactForm';
 import MetaTags from 'react-meta-tags';
 import Footer from '../global/Footer';
+import Loader from '../global/Loader';
 
 
 
@@ -25,6 +26,15 @@ const Contact = () => {
 
     const classes = useStyles();
 
+    const initalLoadingState = {isLoading: false, loadingMessage: 'Sending your message now. One moment.'};
+
+    const [loading, setLoading] = useState(initalLoadingState);
+
+    if (loading.isLoading) {
+        return (
+            <Loader message={loading.loadingMessage} />
+        )
+    } else {
     return (
         <>
         <Container maxWidth="xl">
@@ -47,13 +57,14 @@ const Contact = () => {
                         </Typography>
                     </Grid>
                 </Grid>
-                <ContactForm />
+                <ContactForm setLoading={setLoading} loading={loading}/>
             </div>
             <Footer />
         </Container>
         
         </>
     );
+    }
 };
 
 export default Contact;
