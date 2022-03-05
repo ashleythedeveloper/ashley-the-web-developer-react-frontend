@@ -111,7 +111,7 @@ const Header = () => {
   let desktop;
   let mobile;
 
-  if (!isLoggedIn){
+  if (isLoggedIn === 'false'){
     
     desktop=
       <>
@@ -151,12 +151,7 @@ const Header = () => {
             </ListItem>
     </>
     };
-    if (loading) {
-      return (
-        <>
-        </>
-      )
-    } else {
+    
   return (
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
@@ -251,7 +246,7 @@ const Header = () => {
           </Drawer>
       </Toolbar>
     </AppBar>
-  )}
+  )
 };
 
 Header.defaultProps = {
