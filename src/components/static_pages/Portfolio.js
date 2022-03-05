@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -14,6 +14,7 @@ import Header from '../global/Header';
 import { Link } from 'react-router-dom';
 import Footer from '../global/Footer';
 import Loader from '../global/Loader';
+import axiosInstance from '../global/axiosInstance';
 
 
 
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%',
-    
+
   },
   cardDescription: {
     paddingTop: theme.spacing(2)
@@ -50,72 +51,87 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const Portfolio = ({apiData}) => {
-  
-  const defaultLoadingState = {isLoading: true, loadingMessage: "Fetching projects. One moment."};
+const Portfolio = () => {
+
+  const defaultLoadingState = { isLoading: true, loadingMessage: "Fetching projects. One moment." };
 
   const [loading, setLoading] = useState(defaultLoadingState)
 
+  const [projects, setProjects] = useState([])
+
   const classes = useStyles();
+
+  useEffect(() => {
+    axiosInstance.get('projects/')
+    .then((res) => {
+      setProjects(res.data)
+      setLoading({...loading, isLoading: false})
+    })
+    .catch((err) => {
+      setLoading({...loading, isLoading: false})
+    })
+    
+  }, [])
 
   if (loading.isLoading) {
     return (
       <>
-      <Header />
-    <Loader message={loading.loadingMessage} />
-    </>
+        <Header />
+        <Loader message={loading.loadingMessage} />
+      </>
     )
   } else {
-  return(
-    <>
-    <Header />
-    <Container maxWidth='xl'>
-      <MetaTags>
+    return (
+      <>
+        <Header />
+        <Container maxWidth='xl'>
+          <MetaTags>
             <title>Portfolio Projects | Ashley The Web Developer</title>
             <meta name="description" content='Check out the projects that I have created. From full web apps to...' />
             <meta property="og:title" content='Portfolio Projects | Ashley The Web Developer' />
             {/* <meta property="og:image" content="path/to/image.jpg" /> */}
-      </MetaTags>
-      <Grid container spacing={4} justify='center' className={classes.items}>
-        {apiData.map((apiData) => {
-          return(
-            <Grid item key={apiData.projectName} xs={12} md={6} lg={4} align='center'>
-              <Card raised className={classes.item}> 
-              
-              <CardActionArea component={ Link } to={'portfolio/'+ apiData.projectName}>
-              <CardMedia
-                  className={classes.media}
-                  image={apiData.projectThumbnail}
-                  title="Contemplative Reptile"
-                />
-                
-                <CardContent>
-                  <Typography variant='h6' align='left' className={classes.cardTitle}>
-                    {apiData.projectName}
-                  </Typography>
-                  <Typography variant='body1' align='left' className={classes.cardDescription}>
-                  {apiData.projectDescription}
-                </Typography>
-              </CardContent>
-              </CardActionArea>
-              <CardActions className={classes.cardButtonArea}>
-              <Button size="small" variant='contained' color="primary" component={Link} to={'portfolio/'+ apiData.projectName}>
-                  Learn More
+          </MetaTags>
+          <Grid container spacing={4} justify='center' className={classes.items}>
+            {projects.map((apiData) => {
+              return (
+                <Grid item key={apiData.projectName} xs={12} md={6} lg={4} align='center'>
+                  <Card raised className={classes.item}>
+
+                    <CardActionArea component={Link} to={'portfolio/' + apiData.slug}>
+                      <CardMedia
+                        className={classes.media}
+                        image={apiData.main_project_image}
+                        title={apiData.project_title}
+                      />
+
+                      <CardContent>
+                        <Typography variant='h6' align='left' className={classes.cardTitle}>
+                          {apiData.project_title}
+                        </Typography>
+                        <Typography variant='body1' align='left' className={classes.cardDescription}>
+                          {apiData.meta_description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions className={classes.cardButtonArea}>
+                      <Button size="small" variant='contained' color="primary" component={Link} to={'portfolio/' + apiData.slug}>
+                        Learn More
                 </Button>
-                </CardActions>
-                
+                    </CardActions>
 
 
-            </Card>
-          </Grid>
-        )})};
+
+                  </Card>
+                </Grid>
+              )
+            })}
       </Grid>
-      <Footer/>
-   </Container>
-   </>
+          <Footer />
+        </Container>
+      </>
 
-  );
-          }
+    );
+  }
 };
 
 export default Portfolio
