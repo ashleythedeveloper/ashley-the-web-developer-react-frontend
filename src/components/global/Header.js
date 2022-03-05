@@ -16,7 +16,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import EmailIcon from '@material-ui/icons/Email';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import CodeIcon from '@material-ui/icons/Code';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -182,9 +181,10 @@ const Header = ({isUserLoggedIn, isLoading}) => {
             <Link variant="button" color="textPrimary" to="/about" className={classes.link}>
               About
           </Link>
-            <Link variant="button" color="textPrimary" to="/blog" className={classes.link}>
+          {/* The blog component will be added at a later date */}
+            {/* <Link variant="button" color="textPrimary" to="/blog" className={classes.link}>
               Blog
-          </Link>
+          </Link> */}
           </Typography>
         </nav>
        
@@ -233,12 +233,13 @@ const Header = ({isUserLoggedIn, isLoading}) => {
               </ListItemIcon>
               <ListItemText primary="About"/>
             </ListItem>
-            <ListItem button component={ Link } to='/blog' onClick={handleDrawClose}>
+            {/* The blog component will be added at a later date */}
+            {/* <ListItem button component={ Link } to='/blog' onClick={handleDrawClose}>
               <ListItemIcon>
                 <CodeIcon />
               </ListItemIcon>
               <ListItemText primary="Blog"/>
-            </ListItem>
+            </ListItem> */}
             {mobile}
             </div>
             <div className={classes.drawerSocialIcons}>
