@@ -11,7 +11,6 @@ import HomePage from './components/static_pages/HomePage';
 import Contact from './components/static_pages/Contact';
 import About from './components/static_pages/About';
 import GA4React from "ga-4-react";
-import Axios2 from './components/global/Axios2';
 import Portfolio from './components/static_pages/Portfolio';
 import BlogPost from './components/static_pages/BlogPost';
 import NotFound404 from './components/global/NotFound404';
@@ -62,11 +61,21 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <Header />
             <ThankyouPage />
           </Route>
-          <Route path="/portfolio" exact component= { () => <Axios2 endpoint={'portfolio-projects/'} component={Portfolio}/>} />
-          <Route path="/portfolio/:project" exact component= { ({match}) => <Axios2 match={match} endpoint={'portfolio-project/'+match.params['project']+'/'} component={PortfolioProject}/>} />
-          <Route path="/blog" exact component= { ({match}) => <Axios2 match={match} endpoint={'blogposts/'} component={Blog}/>} />       
-          <Route path="/:blogPost" exact component= { ({match}) => <Axios2 match={match} endpoint={'blogposts/'} component={BlogPost}/>} />          
-          <Route path="/:parent/:blogPost" exact component= { ({match}) => <BlogPost match={match} endpoint={'blogposts/'}/>} />          
+          <Route path="/portfolio" exact>
+            <Portfolio />
+          </Route>
+          <Route path="/portfolio/:project" exact>
+            <PortfolioProject />
+          </Route>
+          {/* <Route path="/blog" exact>
+            <Blog />  
+          </Route>       
+          <Route path="/:blogPost" exact>
+            <BlogPost />
+          </Route>         
+          <Route path="/:parent/:blogPost" exact>
+          <BlogPost match={match} endpoint={'blogposts/'}/>
+            </Route>           */}
           <Route Path="*" exact component={NotFound404} />
         </Switch>
         
@@ -75,7 +84,7 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
   ReactDOM.render(
     <Router>
         <Switch>
-          <Route path="/" exact>
+        <Route path="/" exact>
             <HomePage />
           </Route>
           <Route path="/editor" exact>
@@ -105,17 +114,24 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <Header />
             <ThankyouPage />
           </Route>
-          <Route path="/portfolio" exact component= { () => <Axios2 endpoint={'portfolio-projects/'} component={Portfolio}/>} />
-          <Route path="/portfolio/:project" exact component= { ({match}) => <Axios2 match={match} endpoint={'portfolio-project/'+match.params['project']+'/'} component={PortfolioProject}/>} />
-          <Route path="/blog" exact component= { ({match}) => <Axios2 match={match} endpoint={'blogposts/'} component={Blog}/>} />       
-          <Route path="/:blogPost" exact component= { ({match}) => <Axios2 match={match} endpoint={'blogposts/'} component={BlogPost}/>} />          
-          <Route path="/:parent/:blogPost" exact component= { ({match}) => <BlogPost match={match} endpoint={'blogposts/'}/>} />          
+          <Route path="/portfolio" exact>
+            <Portfolio />
+          </Route>
+          <Route path="/portfolio/:project" exact>
+            <PortfolioProject />
+          </Route>
+          {/* <Route path="/blog" exact>
+            <Blog />  
+          </Route>       
+          <Route path="/:blogPost" exact>
+            <BlogPost />
+          </Route>         
+          <Route path="/:parent/:blogPost" exact>
+          <BlogPost />
+            </Route>           */}
           <Route Path="*" exact component={NotFound404} />
         </Switch>
     </Router>, rootElement);
     }
 })();
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
