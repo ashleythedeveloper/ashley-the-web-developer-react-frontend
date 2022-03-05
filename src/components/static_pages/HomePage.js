@@ -19,8 +19,7 @@ import MetaTags from 'react-meta-tags';
 import Schema from '../global/Schema';
 import Footer from '../global/Footer';
 import Header from '../global/Header';
-import isUserLoggedIn from '../global/isUserLoggedIn';
-import IsUserLoggedIn from '../global/isUserLoggedIn';
+
 
 
 
@@ -276,9 +275,7 @@ const HomePage = () => {
 
     return (
         <React.Fragment>
-            <IsUserLoggedIn>
             <Header />
-            </IsUserLoggedIn>
             <MetaTags>
                 <title>{pageData.title}</title>
                 <meta name="description" content={pageData.description} />
