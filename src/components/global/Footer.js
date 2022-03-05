@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Copyright from './Copyright';
 import CallIcon from '@material-ui/icons/Call';
 import EmailIcon from '@material-ui/icons/Email';
-import BusinessIcon from '@material-ui/icons/Business';
+import Home from '@material-ui/icons/Home';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import { IconButton } from '@material-ui/core';
@@ -145,7 +145,7 @@ const Footer = () => {
               </Typography>
               </div>
               <div>
-           <BusinessIcon className={classes.footerContactButton}/>
+           <Home className={classes.footerContactButton}/>
            
               <Typography className={classes.footerContactText}>
                 Newcastle, NSW, Australia
