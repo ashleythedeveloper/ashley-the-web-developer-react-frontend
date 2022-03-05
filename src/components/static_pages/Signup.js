@@ -51,9 +51,6 @@ const Signup = () => {
   // Initialise a variable and set it to the history object.
   const history = useHistory();
 
-  // Initialise a variable that will be used to display an alert box.
-  let messageAlert;
-
   // Initialise an immutable object that will store the forms data.
   const initalFormData = Object.freeze({
     userName: '',
@@ -67,84 +64,138 @@ const Signup = () => {
   // Initialise a state variable and asign the frozen form object to it.
   const [formData, updateFormData] = useState(initalFormData);
 
+  // Initialise the default loading state
+  const defaultLoadingState = { isLoading: false, loadingMessage: '' }
+
   // Initialise a state variable to controll the loading screen.
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(defaultLoadingState);
 
-  // Initialise a state variable to store any error from the signup endpoint or this component.
-  const [message, setMessage] = useState('');
+  // Set the default notification state
+  const defaultNotificationState = {
+    notificationType: '',
+    notificationTitle: '',
+    notificationMessage: '',
+    notificationTimer: 5000
+  };
 
-  // Initialise a state variable to contol the form fileds error state.
-  const [fieldErrors, setFieldErrors] = useState({
+  // Used to store success and error messages
+  const [notifications, setNotifications] = useState(defaultNotificationState);
+
+  const defaultFormFieldErrorState = {
     email: false,
     username: false,
     password: false,
     password2: false,
-  });
+  }
+
+  // Initialise a state variable to contol the form fileds error state.
+  const [formFieldErrors, setFormFieldErrors] = useState(defaultFormFieldErrorState);
 
   // Initialise a function to handle any change to the form fields and commits those changes to the forms object held within state.
-  const handleChange = (e) => {
+  const handleFormChange = (e) => {
     updateFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-
   // Initialise a function to handle the submit event which is call by the create account button at the bottom of the form.
-  const formSubmit = (e) => {
-    // Hide the signup form and display the loading screen.
-    setLoading(true);
+  const handleFormSubmit = (e) => {
 
     // Prevent the form from submitting.
     e.preventDefault();
 
+    // Hide the signup form and display the loading screen.
+    setLoading({ isLoading: true, loadingMessage: 'We are creating your account. Hold tight!' });
+
     // Check if both passwords match. If the passwords dont match, deactivate the loading screen and show the signup form along with
     // the alert box with the appropriate error message and both password fields highlited (error).
     if (formData.password !== formData.password2) {
-      setLoading(false);
-      setMessage({ message: "Your passwords don't match. Please try again." });
-      setFieldErrors({ password: true, password2: true });
+      setFormFieldErrors({ ...formFieldErrors, password: true, password2: true });
+      setNotifications({
+        notificationType: 'error',
+        notificationTitle: 'Error',
+        notificationMessage: 'You\'re passwords don\'t match. Please try again.',
+        notificationTimer: null
+      });
+      setLoading(defaultLoadingState);
       window.scrollTo(0, 0)
     } else {
       // If both passwords match, submit the form data object to the signup endpoint.
       axiosInstance.post('signup/', formData)
         .then((res) => {
           // If the users account has been created, deactivate the loading screen and navigate the user to the login page.
-          setLoading(false);
-          history.push('/login');
+          history.push('/login',
+            {
+              notification: {
+                notificationType: 'success',
+                notificationTitle: '',
+                notificationMessage: "Your account has been successfully created.",
+                notificationTimer: null
+              }
+            });
         })
         .catch((err) => {
           // If the endpoint returned and error, deactivate the loading screen.
-          setLoading(false);
+          setLoading(defaultLoadingState);
           if (!err.response && err.message.includes('timeout')) {
             // If the errors response object is empty the conection has timed out. Display the alert box with the appropiate message.
-            setMessage({ message: "There has been an error communicating with our database and we were not able to create your account. If the problem persists, please contact support." })
+            setNotifications({
+              notificationType: 'error',
+              notificationTitle: 'Error',
+              notificationMessage: "There has been an error communicating with our database and we were not able to create your account. If the problem persists, please contact support.",
+              notificationTimer: null
+            });
           } else if (!err.response) {
-            setMessage({ message: "There has been an error with CORS and we were not able to create your account. If the problem persists, please contact support." })
-
+            setNotifications({
+              notificationType: 'error',
+              notificationTitle: 'Error',
+              notificationMessage: "There has been an error with CORS and we were not able to create your account. If the problem persists, please contact support.",
+              notificationTimer: null
+            });
           } else {
             // Checks the errors response object if the error was caused because the user exists
             if (err.response.data.errorType === "User Exists") {
               // Checks if the error was raised because of a matching username. 
               // If so, display the alert box along with the appropiate message and username field highlighted (error).
-              if (err.response.data.field === "Username") {
-                setMessage(err.response.data)
-                setFieldErrors({ username: true })
+              if (err.response.data.errorField === "Username") {
+                setNotifications({
+                  notificationType: err.response.data.notificationType,
+                  notificationTitle: err.response.data.notificationTitle,
+                  notificationMessage: err.response.data.notificationMessage,
+                  notificationTimer: null
+                });
+                setFormFieldErrors({ ...formFieldErrors, username: true });
               } else {
                 // If the previous check failed it was because the email matches an existing user.
                 // Display the alert box along with the appropiate message and email field highlighted (error).
-                setMessage(err.response.data)
-                setFieldErrors({ email: true })
+                setNotifications({
+                  notificationType: err.response.data.notificationType,
+                  notificationTitle: err.response.data.notificationTitle,
+                  notificationMessage: err.response.data.notificationMessage,
+                  notificationTimer: null
+                });
+                setFormFieldErrors({ ...formFieldErrors, email: true });
               }
-            } else if (err.response.data.errorType === "password") {
+            } else if (err.response.data.errorType === "Password") {
               // Check if the error was produced because of an invalid password (shorter than 8 charaters).
               // Display the alert box along with the appropiate message and both password fields highlighted (error).
-              setMessage(err.response.data)
-              setFieldErrors({ password: true, password2: true })
+              setNotifications({
+                notificationType: err.response.data.notificationType,
+                notificationTitle: err.response.data.notificationTitle,
+                notificationMessage: err.response.data.notificationMessage,
+                notificationTimer: null
+              });
+              setFormFieldErrors({ ...formFieldErrors, password: true, password2: true });
             } else {
               // The error has been caused by an error creating the user on the backend.
               // Display the alert box along with the appropiate message.
-              setMessage(err.response.data)
+              setNotifications({
+                notificationType: err.response.data.notificationType,
+                notificationTitle: err.response.data.notificationTitle,
+                notificationMessage: err.response.data.notificationMessage,
+                notificationTimer: null
+              });
             };
           };
         });
@@ -152,17 +203,13 @@ const Signup = () => {
   };
 
   // Inilise a function that will be used to close the alert box.
-  const closeAlert = () => {
+  const closeNotificationAlertBox = () => {
     // Set the message state variable to an empty string which will 
     // cause the alert box to disapear due to the ternary statment contained within the messageAlert variable.
-    setMessage('');
+    setNotifications(defaultNotificationState);
 
     // Set all of the values to the corrisponding keys that handle the error fields to false.
-    setFieldErrors({
-      email: false,
-      username: false,
-      password: false
-    });
+    setFormFieldErrors(defaultFormFieldErrorState);
   };
 
   // Call the Material UI Style API
@@ -170,12 +217,14 @@ const Signup = () => {
 
   // Set the messageAlert variable to a ternary statment that will control if the alert box will be displayed or not.
   // If the message state variable is empty show nothing, else display the NotificationAlert component along with the relvent message.
-  messageAlert = message ? <NotificationAlert alertType={"error"} alertTitle={"Error"} alertMessage={message.message} alertCloseCallback={closeAlert} /> : ''
+  // Initialise a variable that will store the notification alert box component.
+  let notificationAlertBox = notifications.notificationMessage ? <NotificationAlert alertType={notifications.notificationType} alertTitle={notifications.notificationTitle} alertMessage={notifications.notificationMessage} alertCloseCallback={closeNotificationAlertBox} /> : ''
+
 
   // If the loading state variable is set to true, show the loading component, else show the signup page.
-  if (loading) {
+  if (loading.isLoading) {
     return (
-      <Loader message="Creating your account, hold tight!" />
+      <Loader message={loading.loadingMessage} />
     )
   } else {
     return (
@@ -191,10 +240,10 @@ const Signup = () => {
         </Typography>
             <Grid container spacing={2} className={classes.alertContainer}>
               <Grid item xs={12}>
-                {messageAlert}
+                {notificationAlertBox}
               </Grid>
             </Grid>
-            <form className={classes.form} name="signupForm" onChange={handleChange} onSubmit={formSubmit}>
+            <form className={classes.form} name="signupForm" onChange={handleFormChange} onSubmit={handleFormSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
@@ -205,8 +254,8 @@ const Signup = () => {
                     id="userName"
                     label="Username"
                     autoComplete="username"
-                    error={fieldErrors.username}
-                    defaultValue={formData.userName}
+                    error={formFieldErrors.username}
+                    value={formData.userName}
                   />
                 </Grid>
                 <Grid item item xs={6}>
@@ -217,10 +266,10 @@ const Signup = () => {
                     required
                     id="firstName"
                     label="First Name"
-                    defaultValue={formData.firstName}
+                    value={formData.firstName}
                   />
-                  </Grid>
-                  <Grid item item xs={6}>
+                </Grid>
+                <Grid item item xs={6}>
                   <TextField
                     name="lastName"
                     variant="outlined"
@@ -228,7 +277,7 @@ const Signup = () => {
                     required
                     id="lastName"
                     label="Last Name"
-                    defaultValue={formData.lastName}
+                    value={formData.lastName}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -241,8 +290,8 @@ const Signup = () => {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
-                    error={fieldErrors.email}
-                    defaultValue={formData.email}
+                    error={formFieldErrors.email}
+                    value={formData.email}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -255,8 +304,8 @@ const Signup = () => {
                     type="password"
                     id="password"
                     autoComplete="new-password"
-                    error={fieldErrors.password}
-                    defaultValue={formData.password}
+                    error={formFieldErrors.password}
+                    value={formData.password}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -269,8 +318,8 @@ const Signup = () => {
                     type="password"
                     id="password2"
                     autoComplete="new-password"
-                    error={fieldErrors.password2}
-                    defaultValue={formData.password2}
+                    error={formFieldErrors.password2}
+                    value={formData.password2}
                   />
                 </Grid>
               </Grid>
