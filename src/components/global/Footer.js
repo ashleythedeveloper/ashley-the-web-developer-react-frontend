@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 const footerNav = [
     {
       title: 'Menu',
-      description: ['Home','Portfolio', 'Contact', 'About', 'Blog'],
+      description: ['Home','Portfolio', 'Contact', 'About'],
     },
     {
       title: 'Privacy',
@@ -148,7 +148,7 @@ const Footer = () => {
            <BusinessIcon className={classes.footerContactButton}/>
            
               <Typography className={classes.footerContactText}>
-                Worldwide
+                Newcastle, NSW, Australia
               </Typography>
               </div>
               <div style={{ paddingTop: '1rem'}}>
