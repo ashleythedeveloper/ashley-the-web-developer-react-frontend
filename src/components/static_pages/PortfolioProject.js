@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +12,8 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Footer from '../global/Footer';
 import {useParams} from 'react-router-dom';
+import Loader from '../global/Loader';
+
 
 
 
@@ -102,9 +104,12 @@ function getModalStyle() {
 
 const PortfolioProject = ({apiData}) => {
 
+    const defaultLoadingState = {isLoading: true, loadingMessage: 'Fetching the project. One moment.'}
+
+    const [loading, setLoading] = useState(defaultLoadingState)
+
     const {project} = useParams();
 
-    console.log(project)
 
     const pageData = {
         title: "Ashley The Web Developer | Portfolio Project | " + apiData.apiData.prj[0].projectName,
@@ -137,7 +142,14 @@ const PortfolioProject = ({apiData}) => {
           <img className={classes.media} src={imageSrc} alt={apiData.apiData.prj[0].projectName}></img>
         </div>
       );
-
+        if (loading.isLoading) {
+            return (
+            <>
+            <Header />
+            <Loader messahe={loading.loadingMessage}/>
+            </>
+            )
+        } else {
     return (
         <React.Fragment>
             <Header />
@@ -218,7 +230,7 @@ const PortfolioProject = ({apiData}) => {
         </React.Fragment>
 
     );
-
+                        }
 };
 
 export default PortfolioProject
