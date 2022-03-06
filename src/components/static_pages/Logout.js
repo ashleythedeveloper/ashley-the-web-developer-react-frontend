@@ -20,7 +20,7 @@ console.log(isLoggedIn)
   } else {
 
 
-    axiosInstance.post('auth/blacklist-token/', {}, { withCredentials: true })
+    axiosInstance.post('auth/blacklist-token/')
       .then((res) => {
         history.push('')
       })

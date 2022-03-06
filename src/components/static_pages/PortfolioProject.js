@@ -75,7 +75,7 @@ const PortfolioProject = () => {
     const {project} = useParams();
 
     useEffect(() => {
-        axiosInstance.post('project/', {slug: project}, {withCredentials: true})
+        axiosInstance.post('project/', {slug: project})
         .then((res) => {
             console.log(res.data)
             setProjectData(res.data);

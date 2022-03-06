@@ -97,7 +97,8 @@ const Header = () => {
   const classes = useStyles();
 
   const [drawState, setDrawState] = useState(false);
-  const cookie = Cookies.get('is-logged-in')
+  const cookie = Cookies.get('is-logged-in');
+  console.log(cookie)
   const [isLoggedIn, setIsLoggedIn] = useState(cookie ? cookie : false)
 
   const handleDrawOpen = () => {

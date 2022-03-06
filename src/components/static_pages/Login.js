@@ -128,11 +128,7 @@ const Login = () => {
       axiosInstance.post('login/', {
         email: formData.email,
         password: formData.password,
-      }, {headers: {
-          'Content-Type': 'application/json'
-        },
-          withCredentials: true
-        })
+      })
         .then((res) => {
           history.push('');
         })
