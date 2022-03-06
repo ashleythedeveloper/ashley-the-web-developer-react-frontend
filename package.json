@@ -31,21 +31,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "postbuild": "react-snap"
-  },
+    "eject": "react-scripts eject"
+    },
   "proxy": "http://192.168.1.4:5000",
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "reactSnap": {
-    "waitFor": 5000,
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
     ]
   },
   "browserslist": {
