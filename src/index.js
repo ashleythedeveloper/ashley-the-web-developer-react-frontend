@@ -16,11 +16,11 @@ import PortfolioProject from './components/static_pages/PortfolioProject';
 import TextEditor from './components/global/TextEditor';
 
 
-const ga4react = new GA4React("G-CDFRJQR56Q");
+// const ga4react = new GA4React("G-CDFRJQR56Q");
 
 
 (async () => {
-  await ga4react.initialize();
+  // await ga4react.initialize();
 
   const rootElement = document.getElementById("root");
   
