@@ -58,7 +58,7 @@ const ContactForm = ({ setLoading, loading }) => {
             lastName: formData.lastName,
             email: formData.email,
             message: formData.message
-        })
+        }, {withCredentials: true})
             .then(() => {
                 setLoading({ ...loading, isLoading: false })
                 history.push('/thank-you')

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://localhost:5000/api/';
+const baseURL = 'https://api.ashleythewebdeveloper.com.au/api/';
 const axiosInstance = axios.create({
 	baseURL: baseURL,
 	timeout: 5000,

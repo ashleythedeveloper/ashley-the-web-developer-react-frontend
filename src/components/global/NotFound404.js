@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 import MetaTags from 'react-meta-tags';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Header from './Header';
+import Footer from './Footer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +29,8 @@ const NotFound404 = () => {
     const classes = useStyles()
 
     return (
+        <>
+        <Header />
         <Container maxWidth='xl'>
             <MetaTags>
                   <title>404 Not Found</title>
@@ -48,6 +52,8 @@ const NotFound404 = () => {
                 </Grid>
             </Grid>
         </Container>
+        <Footer/>
+        </>
     );
 };
 

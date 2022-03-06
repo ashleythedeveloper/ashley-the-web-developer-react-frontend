@@ -21,7 +21,7 @@ const GenerateMetaTags = () => {
   });
 
   useEffect(() => {
-    axiosInstance.post('get-page-metadata/', { location: pageLocation })
+    axiosInstance.post('get-page-metadata/', { location: pageLocation }, {withCredentials: true})
       .then((res) => {
         setMetaData(res.data);
       })

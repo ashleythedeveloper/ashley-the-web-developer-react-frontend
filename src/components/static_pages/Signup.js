@@ -121,7 +121,7 @@ const Signup = () => {
       window.scrollTo(0, 0)
     } else {
       // If both passwords match, submit the form data object to the signup endpoint.
-      axiosInstance.post('signup/', formData)
+      axiosInstance.post('signup/', formData, {withCredentials: true})
         .then((res) => {
           // If the users account has been created, deactivate the loading screen and navigate the user to the login page.
           history.push('/login',
