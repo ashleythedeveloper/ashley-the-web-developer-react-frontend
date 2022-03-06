@@ -78,7 +78,6 @@ const Login = () => {
   }
   const successNotificationState = location.state ? location.state.notification : defaultNotificationState
  
-  console.log(location.state)
   // Used to store success and error messages
   const [notifications, setNotifications] = useState(hasShowSuccessNotification ? defaultNotificationState : successNotificationState);
 
@@ -101,7 +100,6 @@ const Login = () => {
     // Set all of the values to the corrisponding keys that handle the error fields to false.
     setFormFieldErrors(defaultFormFieldErrorState);
   };
-  console.log(notifications)
     // Set the messageAlert variable to a ternary statment that will control if the alert box will be displayed or not.
     // If the message state variable is empty show nothing, else display the NotificationAlert component along with the relvent message.
     let notificationAlertBox = notifications.notificationMessage ? <NotificationAlert 
@@ -141,7 +139,8 @@ const Login = () => {
               notificationMessage: err.response.data.notificationMessage,
               notificationTimer: null
             });
-            setLoading(defaultLoadingState)
+            setLoading(defaultLoadingState);
+            setFormFieldErrors({email: true, password: true});
           }
         })
     };
@@ -173,6 +172,7 @@ const Login = () => {
         </Grid>
             <form name="loginForm" className={classes.form} onChange={handleFormChange} onSubmit={handleFormSubmit} noValidate>
               <TextField
+                error={formFieldErrors.email}
                 variant="outlined"
                 margin="normal"
                 required
@@ -185,6 +185,7 @@ const Login = () => {
                 autoFocus
               />
               <TextField
+                error={formFieldErrors.password}
                 variant="outlined"
                 margin="normal"
                 required

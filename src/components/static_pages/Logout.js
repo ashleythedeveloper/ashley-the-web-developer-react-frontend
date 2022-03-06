@@ -14,7 +14,6 @@ const Logout = () => {
 
 
   const isLoggedIn = Cookies.get('is-logged-in');
-console.log(isLoggedIn)
   if (isLoggedIn === 'false') {
     history.push('')
   } else {

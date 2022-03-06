@@ -98,8 +98,7 @@ const Header = () => {
 
   const [drawState, setDrawState] = useState(false);
   const cookie = Cookies.get('is-logged-in');
-  console.log(cookie)
-  const [isLoggedIn, setIsLoggedIn] = useState(cookie ? cookie : false)
+  const isLoggedIn = cookie ? cookie : 'false';
 
   const handleDrawOpen = () => {
     setDrawState(true);
@@ -111,7 +110,6 @@ const Header = () => {
   
   let desktop;
   let mobile;
-
   if (isLoggedIn === 'false'){
     
     desktop=

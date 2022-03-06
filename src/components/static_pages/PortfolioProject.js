@@ -77,7 +77,6 @@ const PortfolioProject = () => {
     useEffect(() => {
         axiosInstance.post('project/', {slug: project})
         .then((res) => {
-            console.log(res.data)
             setProjectData(res.data);
             setLoading({...loading, isLoading: false})
         })

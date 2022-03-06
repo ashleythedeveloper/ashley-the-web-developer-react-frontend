@@ -10,7 +10,7 @@ const GenerateMetaTags = () => {
   // Initialise a variable and set it to the history object.
   const history = useHistory();
 
-  const [pageLocation, setPageLocation] = useState(history.location.pathname);
+  const pageLocation = history.location.pathname;
 
   const [metaData, setMetaData] = useState({
     page_image: '',

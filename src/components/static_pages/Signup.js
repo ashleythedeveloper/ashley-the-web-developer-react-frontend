@@ -257,7 +257,7 @@ const Signup = () => {
                     value={formData.userName}
                   />
                 </Grid>
-                <Grid item item xs={6}>
+                <Grid item xs={6}>
                   <TextField
                     name="firstName"
                     variant="outlined"
@@ -268,7 +268,7 @@ const Signup = () => {
                     value={formData.firstName}
                   />
                 </Grid>
-                <Grid item item xs={6}>
+                <Grid item xs={6}>
                   <TextField
                     name="lastName"
                     variant="outlined"
