@@ -4,9 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
-import MetaTags from 'react-meta-tags';
 import Header from '../global/Header';
-import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Footer from '../global/Footer';
 import {useParams} from 'react-router-dom';
@@ -49,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: theme.spacing(2),
         paddingRight: theme.spacing(2),
         paddingTop: theme.spacing(10),
+        
 
     },
     button: {

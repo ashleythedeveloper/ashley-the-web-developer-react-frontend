@@ -31,7 +31,7 @@ const TextEditor = () => {
             editorClassName="editorClassName"
             onEditorStateChange= {seteditorStates}
           />
-          <Button onClick={helper}>Hoy</Button>
+          <Button onClick={helper}>Submit</Button>
         </Grid>
       </Grid>
 </Container>
