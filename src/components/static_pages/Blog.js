@@ -11,8 +11,6 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MetaTags from 'react-meta-tags';
 import { Link } from 'react-router-dom';
-import Header from '../global/Header';
-import Footer from '../global/Footer';
 
 
 
@@ -57,7 +55,6 @@ const Blog = ({apiData}) => {
   const classes = useStyles();
   return(
     <>
-    <Header />
     <Container maxWidth='xl'>
       <MetaTags>
             <title>Blog | Ashley The Web Developer | Learn how to Code!</title>
@@ -98,7 +95,6 @@ const Blog = ({apiData}) => {
           </Grid>
         )})}
       </Grid>
-      <Footer />
    </Container>
 
   </>

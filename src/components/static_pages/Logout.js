@@ -2,7 +2,6 @@ import React from 'react';
 import Cookies from 'js-cookie'
 import { useHistory } from 'react-router-dom';
 import axiosInstance from '../global/axiosInstance';
-import Header from '../global/Header';
 import Loader from '../global/Loader';
 
 
@@ -29,7 +28,6 @@ const Logout = () => {
 }
     return (
       <>
-        <Header />
         <Loader message={defaultLoadingState.loadingMessage} />
       </>
     )

@@ -7,8 +7,6 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 import MetaTags from 'react-meta-tags';
 import Schema from '../global/Schema';
-import Footer from '../global/Footer';
-import Header from '../global/Header';
 
 
 
@@ -75,7 +73,6 @@ const HomePage = () => {
 
     return (
         <>
-            <Header />
             <MetaTags>
                 <title>{pageData.title}</title>
                 <meta name="description" content={pageData.description} />
@@ -114,7 +111,6 @@ const HomePage = () => {
                     </div>
                 </div>
             </Container>
-            <Footer />
         </>
     );
 };

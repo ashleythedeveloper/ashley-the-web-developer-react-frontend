@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import ContactForm from '../global/ContactForm';
 import MetaTags from 'react-meta-tags';
-import Footer from '../global/Footer';
 import Loader from '../global/Loader';
 
 
@@ -59,7 +58,6 @@ const Contact = () => {
                 </Grid>
                 <ContactForm setLoading={setLoading} loading={loading}/>
             </div>
-            <Footer />
         </Container>
         
         </>

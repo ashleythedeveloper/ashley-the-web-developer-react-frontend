@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axiosInstance from '../global/axiosInstance';
-import Footer from '../global/Footer';
 import Loader from '../global/Loader';
 import NotificationAlert from '../global/NotificationAlert';
 import GenerateMetaTags from '../global/GenerateMetaTags'
@@ -341,7 +340,6 @@ const Signup = () => {
             </form>
           </div>
         </Container>
-        <Footer />
       </>
     )
   }

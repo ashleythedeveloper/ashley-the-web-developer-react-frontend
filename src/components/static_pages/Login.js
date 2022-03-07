@@ -11,10 +11,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import MetaTags from 'react-meta-tags';
 import axiosInstance from '../global/axiosInstance';
-import Footer from '../global/Footer';
 import Loader from '../global/Loader';
 import NotificationAlert from '../global/NotificationAlert';
-import Header from '../global/Header';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -152,7 +150,6 @@ const Login = () => {
     } else {
     return (
       <>
-            <Header />
         <Container component="main" maxWidth="xs">
           <MetaTags>
             <title>Login | Ashley The Web Developer</title>
@@ -220,7 +217,6 @@ const Login = () => {
             </form>
           </div>
         </Container>
-        <Footer />
       </>
     )}
   }

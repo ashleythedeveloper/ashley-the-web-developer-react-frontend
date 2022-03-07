@@ -14,6 +14,7 @@ import NotFound404 from './components/global/NotFound404';
 import ThankyouPage from './components/static_pages/ThankyouPage';
 import PortfolioProject from './components/static_pages/PortfolioProject';
 import TextEditor from './components/global/TextEditor';
+import Footer from './components/global/Footer';
 
 
 const ga4react = new GA4React("G-CDFRJQR56Q");
@@ -26,12 +27,12 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
   
   ReactDOM.render(
     <Router>
+      <Header />
         <Switch>
         <Route path="/" exact>
             <HomePage />
           </Route>
           <Route path="/editor" exact>
-            <Header />
             <TextEditor />
           </Route>
           <Route  path="/login" exact>
@@ -44,15 +45,12 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             <Signup />
           </Route>
           <Route path="/contact" exact>
-            <Header /> 
             <Contact />
           </Route>
           <Route path="/about" exact>
-            <Header />
             <About />
           </Route>
           <Route path="/thank-you" exact>
-            <Header />
             <ThankyouPage />
           </Route>
           <Route path="/portfolio" exact>
@@ -72,6 +70,7 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
             </Route>           */}
           <Route Path="*" exact component={NotFound404} />
         </Switch>
+        <Footer />
     </Router>, rootElement);
     
 })();

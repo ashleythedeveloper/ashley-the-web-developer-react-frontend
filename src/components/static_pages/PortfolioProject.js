@@ -4,9 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Chip from '@material-ui/core/Chip';
-import Header from '../global/Header';
 import Button from '@material-ui/core/Button';
-import Footer from '../global/Footer';
 import {useParams} from 'react-router-dom';
 import Loader from '../global/Loader';
 import axiosInstance from '../global/axiosInstance';
@@ -105,14 +103,12 @@ const PortfolioProject = () => {
         if (loading.isLoading) {
             return (
             <>
-            <Header />
             <Loader message={loading.loadingMessage}/>
             </>
             )
         } else {
     return (
         <React.Fragment>
-            <Header />
             <Container maxWidth={'md'}>
                 
                 <Grid container direction="row" justifyContent="center" alignItems="center">
@@ -181,7 +177,6 @@ const PortfolioProject = () => {
                         </Grid>
                 
             </Container>
-            <Footer/>
         </React.Fragment>
 
     );

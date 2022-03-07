@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Header from '../global/Header';
 import Blogposts2 from './BlogPosts2';
-import Footer from '../global/Footer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,7 +44,6 @@ const BlogPost = ({match, endpoint}) => {
   const classes = useStyles();
     return (
       <>
-      <Header />
     <Container maxWidth='xl'>
       <div className={classes.containers}>
       </div>

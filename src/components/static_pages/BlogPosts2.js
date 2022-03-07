@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import MetaTags from 'react-meta-tags';
 import NotFound404 from '../global/NotFound404';
-import Footer from '../global/Footer';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,12 +49,10 @@ const useStyles = makeStyles((theme) => ({
 const BlogPosts2 = ({match, apiData}) => {
   
 
-  console.log(apiData)  
   const index = apiData.findIndex(x => x.blogSlug === match.url)
   const classes = useStyles();
   const [resimage, setresimage] = useState(<div className={classes.imgres}></div>)
   const click = () => {
-    console.log('Fired')
     setresimage(<div style={{'display': 'none'}}></div>)
    }
 
@@ -85,7 +82,6 @@ const BlogPosts2 = ({match, apiData}) => {
         <div contentEditable='true' dangerouslySetInnerHTML={{ __html: apiData[index].blogPostContent }}></div>
         </Grid>
           </Grid>
-          <Footer/>
           </Container>
    </>
     );

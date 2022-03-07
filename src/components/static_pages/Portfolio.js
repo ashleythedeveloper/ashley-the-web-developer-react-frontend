@@ -10,9 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MetaTags from 'react-meta-tags';
-import Header from '../global/Header';
 import { Link } from 'react-router-dom';
-import Footer from '../global/Footer';
 import Loader from '../global/Loader';
 import axiosInstance from '../global/axiosInstance';
 
@@ -75,14 +73,12 @@ const Portfolio = () => {
   if (loading.isLoading) {
     return (
       <>
-        <Header />
         <Loader message={loading.loadingMessage} />
       </>
     )
   } else {
     return (
       <>
-        <Header />
         <Container maxWidth='xl'>
           <MetaTags>
             <title>Portfolio Projects | Ashley The Web Developer</title>
@@ -120,7 +116,6 @@ const Portfolio = () => {
               )
             })}
           </Grid>
-          <Footer />
         </Container>
       </>
     );

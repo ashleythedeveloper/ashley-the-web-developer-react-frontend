@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import AboutContent from './AboutContent';
 import MetaTags from 'react-meta-tags';
 import Container from '@material-ui/core/Container';
-import Footer from '../global/Footer';
 
 const useStyles = makeStyles((theme) => ({
     heroHeading: {
@@ -67,7 +66,6 @@ const About = () => {
             </Grid>
             </Grid>
         </Grid>
-        <Footer />
         </Container>
         </>
     );
