@@ -24,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(3)
     },heroSectionQualitiesText: {
         paddingTop: theme.spacing(3)
+    },
+    aboutMainContent: {
+        display: 'flex',
+        justifyContent: 'center'
     }
 
 })
@@ -57,9 +61,10 @@ const About = () => {
             </Typography>
             </Grid>
             </Grid>
-            
-            <Grid align="center" item xs={12}>
+            <Grid item className={classes.aboutMainContent}>
+            <Grid item xs={12} md={10} align="center">
                 <AboutContent />
+            </Grid>
             </Grid>
         </Grid>
         <Footer />
