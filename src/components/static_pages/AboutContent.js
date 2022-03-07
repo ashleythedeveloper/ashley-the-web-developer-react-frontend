@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 
-const useStyles = makeStyles((theme) =>({
+const useStyles = makeStyles((theme) => ({
     heroParagraph: {
         fontSize: "1.3rem",
         paddingTop: theme.spacing(6),
@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) =>({
         paddingTop: theme.spacing(6),
         paddingBottom: theme.spacing(4),
     },
-
-
 }));
 
 
@@ -33,75 +31,104 @@ const AboutContent = () => {
         <div>
             <Grid item xs={11} xl={12} className={classes.paragraphItem}>
                 <Typography align="center" varient="body1" className={classes.heroParagraph}>
-                Hi, my name is Ashley and I like business and I love to solve problems with code.
-                Programming for me gives me the ability to quench my thirst for learning while also giving me the satisfaction of taking a problem and solving it with code and I find the combination of both very stimulating and rewarding.
+                    Hi, my name is Ashley and I love to solve problems with code.
+                <br /><br />
+                I have used a few programming languages & frameworks
+                <br />
+                but I have gravitated towards Javascript, React and Node.js.
+                <br /><br />
+                Programming for me gives me an outlet to creatively express myself,
+                <br />
+                be mentally stimulated and satisfy my inquisitive nature.
                 <br /> <br />
-                I love programming and it genuinely makes me happy.
+                I love being able to rapidly solve real problems and to date, it hasn't got old.
                 </Typography>
             </Grid>
             <Grid item xs={11} xl={12} className={classes.heading2}>
                 <Typography variant="h4" align="left" component="h2" >
-                    How I Started
+                    The problem that got me started
                 </Typography>
             </Grid>
             <Grid item xs={11} xl={12} className={classes.paragraphItem}>
                 <Typography variant="body1" align="left" className={classes.paragraph}>
-                    My coding journey started back in 2016. When I took the plunge and started my own business in the gardening industry. 
-                    While operating and growing that business, problems would present themselves which I could then use code to solve the problem.
+                    My coding journey started back in 2016 when I took the plunge and started my own business in the home services industry.
                     <br /> <br />
-                </ Typography>
+                    One of the issues I faced during this time was scaling one of our competive advantages.
+                    It was pretty simple, I would take high quality photos before we completed the work and after the work was completed
+                    and then brand the photos to the specific property we were working on.
+                    <br /> <br />
+                    This required me to manually download each image from the CRM I was using (ServiceM8).
+                    <br /> <br />
+                    I would then resize the images due to the shear size of the final folder as each image was around 4MB and each job had 20+ photos associated with it.
+                    <br /> <br />
+                    Once I had all of the photos in the one file and resized,
+                    I would then proceed to rename the photos with the address of the property and a number at the end that would increment with each photo.
+                    <br /> <br />
+                    Once that was completed I would then change the name of the folder to the address of the property and finally compress the final folder and send it off to the client.
+                    <br /> <br />
+                    The problem was I couldn't download all of the photos using the CRM at once and then the issue of the format of the images.
+                    <br /> <br />
+                    This process would take 5-10 mins each job and I would need to do this every 4 days or so in the begining.
+                    </ Typography>
                 < Typography variant="h4" align="left" component="h2" className={classes.heading2}>
-                    The Problem 
-                </ Typography>
+                    How I solved the problem
+                    </ Typography>
                 <Typography variant="body1" align="left" className={classes.paragraph}>
-                    One of the problems was presenting before and after photos in a professional manner to clients in the gardening business. 
-
-                    I would need to manually download 40+ photos one by one from the CRM I was using. This process would require opening 2 tabs per photo. I would then need to resize each photo as each photo was 6-10MB each and Gmail will only let you send 25MB per email. 
+                    In my free time I was starting to learn the basics of Python but I would always get bored doing the basic string manipulation and adding items to lists.
+                    <br /><br />
+                    One weekend, I thought I would try somthing a little harder and use the skills I had aquired with python to solve this problem I was having with the images.
+                    <br /> <br />
+                    After a couple of weeks I had the first iteration working but the implamentation was really bad.
                     <br /> <br />
 
-                    Once each photo was resized I would then need to rename each photo with the address of the property. Once that was completed, I would then need to create a folder with the street address as the file name, transfer all of the files into that folder and then finally compress that folder ready to send.
-                    <br /> <br />
-
-                    This process would take 30-40mins each job and we would need to do this every 4 days or so.
-                    <br /> <br />
+                    For example, I needed to make a request to the CRM's API with basic authentication.
+                    Once I was authenticated I would make a request to retrive a spasific job number that I provided via the terminal.
+                    <br/><br/>
+                    Once the API returned the object for that job number I then needed to get the address and the list of unique ids for each file associated with that job number
+                    as the CRM also stored invoice/quote pdfs in the same location.
                     </ Typography>
+
                     < Typography variant="h4" align="left" component="h2" className={classes.heading2}>
-                        How I Solved The Problem 
+                    Where I went wrong
                     </ Typography>
-                    <Typography variant="body1" align="left" className={classes.paragraph}>
-                    In my free time I had started learning the basics of python but always got bored of the basic string manipulation, adding items to lists, etc. 
-                    One weekend I thought I would give it ago and began coding. The first iteration worked but it was soooooo bad. 
+                <Typography variant="body1" align="left" className={classes.paragraph}>
+                    <br />
+                    Where I went wrong with the implamentation was getting the address and UUID's. <br /> <br />
+                    The server would return the JSON object with the data I needed but it was a sting.
+                    Not knowing I needed to convert it to an object I was iterating through that string looking for the word "address" and "uuid" and then splitting the entire string to get the address and uuid's 😅
                     <br /> <br />
 
-                    For example, I needed to make a request to the CRM API with basic authentication. Then filter customer results based on a job number. Once the API returned the object for that job number I then needed to get the address and the list of unique ids for each file associated with that job number as the CRM also stored invoice/quote pdfs in the same location.
+                    If you're not a programmer, this would have to be the worst way to get data from an object. Once I refactored the code I was then accessing this information via the keys of the object 😁
                     <br /> <br />
 
-                    Where it was bad was to get the address I was turning the object into a string than iterating through that string looking for the word "address" and then splitting the entire stringified object to get the address 😅
+                    Once the program had all of the information it needed it then used some logic to filter out the pdfs that were stored with the images.
+                    It then proceeded to download all of the images. Once all of the images were downloaded it then used the library pillow to resize the images to the desired size.
+                    Once the resizing was completed It then iterated over the list of images and changed the file names to the address with the trailing incrementing number.
                     <br /> <br />
 
-                    If you're not a programmer, this is bad. Once I refactored the code on the second iteration, I was then accessing this information via the keys of the object 😁
-                    <br /> <br />
-
-                    Once I had all of the information I needed I used some logic to filter out the pdfs and then downloaded all of the images. I then used the library pillow to resize the images. I then iterated over the list of images to change the file names.
-                    <br /> <br />
-
-                    Once that was all done I then created a new folder with the address as the file name and then moved all of the files over and finally compressed the folder.
-                    When I actually ran this completed program for the first time I WAS HOOKED. I couldn't believe that it worked and the whole process took less than a minute!
-                    <br /> <br />
+                    Once that was all done it then created a new folder with the address as the folder name and then moved all of the files into that folder and finally compressed the folder.
+                    <br /><br />
+                    When I actually ran this completed program for the first time and it exacuted it flawlessly, I WAS HOOKED.
+                    <br /><br/>
+                    I couldn't believe that it worked and the program took less than a minute to complete the task!
                     </ Typography>
-                    < Typography variant="h4" align="left" component="h2" className={classes.heading2}>
-                        The Outcome 
+                < Typography variant="h4" align="left" component="h2" className={classes.heading2}>
+                    The outcome
                     </ Typography>
-                    <Typography variant="body1" align="left" className={classes.paragraph}>
-                    This small little script ended up saving us over $1000 every year and the agony of manually completing this task.
+                <Typography variant="body1" align="left" className={classes.paragraph}>
+                    This small little script ended up saving me over $1000 every year in unproductive wages and the agony of having to manually completing this task.
                     <br /> <br />
-                    
-                    From there, the projects I was building required databases and graphical user interfaces so I began learning HTML/Django and later adding JavaScript and React to my tech stack along with deploying my projects using Nginx and Gunicorn.
+
+                    From there, I was hooked. The projects I started building required databases and graphical user interfaces so I began learning HTML, CSS and Django and continued to improve month by month and building more complex applications.
+                    <br /><br />In recent years I have gravitated towards using Javascript, React, Node.js and PostgreSQL as my prefered stack.
+
+                    I'm really glad I perservered those first weeeks of programming as I wouldn't have found my passion in life.
                     </Typography>
-                    <Typography variant="body1" align="center" className={classes.paragraph}>
+                <Typography variant="body1" align="center" className={classes.paragraph}>
                     <br />
                     Check out the other projects that I have created<br />by clicking the button below.
-                </Typography>   
+                    <br /><br />
+                </Typography>
             </Grid>
             <Grid item xs={11} xl={12} align="center" >
                 <Button component={Link} to="/portfolio" variant="contained" color="primary">
