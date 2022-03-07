@@ -36,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
             paddingBottom: theme.spacing(45),
         }
     },
+    profileImage: {
+        borderRadius: '50%',
+        paddingBottom: theme.spacing(2),
+        paddingLeft: theme.spacing(1)
+    }
 }))
 
 const pageData = {
@@ -84,6 +89,7 @@ const HomePage = () => {
             <Container>
                 <div className={classes.heroContent}>
                     <Grid item className={classes.heroContainer}>
+                        <img src='./profileImage.png' width={150} height={150} className={classes.profileImage}/>
                         <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom className={classes.heroText}>
                             Ashley<br />The Web Developer
                         </Typography>
