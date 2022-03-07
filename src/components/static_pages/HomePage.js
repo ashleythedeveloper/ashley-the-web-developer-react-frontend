@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
             paddingTop: theme.spacing(17),
         },
         [theme.breakpoints.up('sm')]: {
-            paddingTop: theme.spacing(45),
+            paddingTop: theme.spacing(35),
         },
     },
     heroButtons: {
@@ -74,7 +74,7 @@ const HomePage = () => {
 
 
     return (
-        <React.Fragment>
+        <>
             <Header />
             <MetaTags>
                 <title>{pageData.title}</title>
@@ -89,13 +89,13 @@ const HomePage = () => {
             <Container>
                 <div className={classes.heroContent}>
                     <Grid item className={classes.heroContainer}>
-                        <img src='./profileImage.png' width={150} height={150} className={classes.profileImage}/>
+                        <img src='./profileImage.png' width={150} height={150} className={classes.profileImage} />
                         <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom className={classes.heroText}>
                             Ashley<br />The Web Developer
                         </Typography>
                         <Typography variant="h5" align="left" color="textSecondary" paragraph>
-                            Automating your boring tasks and <br />
-                            developing web apps that eat WordPress websites for breakfast<br />
+                            I build and deploy full stack<br />
+                            web applications using React & Node.js<br />
                         </Typography>
                     </Grid>
                     <div className={classes.heroButtons}>
@@ -115,10 +115,7 @@ const HomePage = () => {
                 </div>
             </Container>
             <Footer />
-        </React.Fragment>
-
-
-
+        </>
     );
 };
 
