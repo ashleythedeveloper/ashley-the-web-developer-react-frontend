@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         paddingBottom: theme.spacing(3)
+    },heroSectionQualitiesText: {
+        paddingTop: theme.spacing(3)
     }
 
 })
@@ -49,7 +51,13 @@ const About = () => {
                 <Typography variant="h2" component="h1" align="center" className={classes.heroHeading}>
                     About Me
                 </Typography>
+                <Grid item xs={12} className={classes.heroSectionQualitiesText}>
+            <Typography align='center'>
+                Inquisitive | Persistent | Problem Solver 
+            </Typography>
             </Grid>
+            </Grid>
+            
             <Grid align="center" item xs={12}>
                 <AboutContent />
             </Grid>
