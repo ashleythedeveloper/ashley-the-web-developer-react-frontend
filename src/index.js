@@ -17,6 +17,7 @@ import TextEditor from './components/global/TextEditor';
 import Footer from './components/global/Footer';
 import TermsOfUse from './components/static_pages/TermsOfUse';
 import AdminArea from './components/static_pages/AdminArea';
+import Projects from './components/static_pages/Projects';
 
 
 const ga4react = new GA4React("G-CDFRJQR56Q");
@@ -66,6 +67,9 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
           </Route>
           <Route path='/admin-area' exact>
             <AdminArea />
+          </Route>
+          <Route path='/admin-area/project/:project' exact>
+            <Projects />
           </Route>
           {/* <Route path="/blog" exact>
             <Blog />  
