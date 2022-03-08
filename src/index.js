@@ -16,6 +16,7 @@ import PortfolioProject from './components/static_pages/PortfolioProject';
 import TextEditor from './components/global/TextEditor';
 import Footer from './components/global/Footer';
 import TermsOfUse from './components/static_pages/TermsOfUse';
+import AdminArea from './components/static_pages/AdminArea';
 
 
 const ga4react = new GA4React("G-CDFRJQR56Q");
@@ -62,6 +63,9 @@ const ga4react = new GA4React("G-CDFRJQR56Q");
           </Route>
           <Route path='/terms-of-use' exact>
             <TermsOfUse />
+          </Route>
+          <Route path='/admin-area' exact>
+            <AdminArea />
           </Route>
           {/* <Route path="/blog" exact>
             <Blog />  
