@@ -35,13 +35,13 @@ const AboutContent = () => {
                 <br /><br />
                 I have used a few programming languages & frameworks
                 <br />
-                but I have gravitated towards Javascript, React and Node.js.
+                and have gravitated towards Javascript, React and Node.js.
                 <br /><br />
                 Programming for me gives me an outlet to creatively express myself,
                 <br />
                 be mentally stimulated and satisfy my inquisitive nature.
                 <br /> <br />
-                I love being able to rapidly solve real problems and to date, it hasn't got old.
+                I love being able to rapidly solve real problems.
                 </Typography>
             </Grid>
             <Grid item xs={11} xl={12} className={classes.heading2}>
@@ -54,21 +54,19 @@ const AboutContent = () => {
                     My coding journey started back in 2016 when I took the plunge and started my own business in the home services industry.
                     <br /> <br />
                     One of the issues I faced during this time was scaling one of our competive advantages.
-                    It was pretty simple, I would take high quality photos before we completed the work and after the work was completed
-                    and then brand the photos to the specific property we were working on.
+                    It was pretty simple, I would send high quality before and after photos of the work we completed
+                    to the client. This required manually downloadng each image from the CRM I was using (ServiceM8).
                     <br /> <br />
-                    This required me to manually download each image from the CRM I was using (ServiceM8).
+                    I would then resize the images due to the sheer size of the final folder as each image was around 4MB and each job had 20+ photos associated with it.
                     <br /> <br />
-                    I would then resize the images due to the shear size of the final folder as each image was around 4MB and each job had 20+ photos associated with it.
-                    <br /> <br />
-                    Once I had all of the photos in the one file and resized,
+                    Once I had all of the resized photos in the one folder,
                     I would then proceed to rename the photos with the address of the property and a number at the end that would increment with each photo.
                     <br /> <br />
-                    Once that was completed I would then change the name of the folder to the address of the property and finally compress the final folder and send it off to the client.
+                    Once that was completed, I would then change the name of the folder to the address of the property and compress the final folder and send it off to the client.
                     <br /> <br />
-                    The problem was I couldn't download all of the photos using the CRM at once and then the issue of the format of the images.
+                    The problem was, I had to download each photo individually. I was unable to select all of the images and download them at once using the CRM and then the issue of the format of the images.
                     <br /> <br />
-                    This process would take 5-10 mins each job and I would need to do this every 4 days or so in the begining.
+                    This process would take 5-10 mins for each job. This became a nighmare when I scaled the business which resulted in this process taking hours out of my week.
                     </ Typography>
                 < Typography variant="h4" align="left" component="h2" className={classes.heading2}>
                     How I solved the problem
