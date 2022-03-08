@@ -91,8 +91,8 @@ const HomePage = () => {
                             Ashley<br />The Web Developer
                         </Typography>
                         <Typography variant="h5" align="left" color="textSecondary" paragraph>
-                            I build and deploy full stack<br />
-                            web applications using React & Node.js<br />
+                            I build and deploy full stack <br/>web applications
+                             using JavaScript, React & Node.js<br />
                         </Typography>
                     </Grid>
                     <div className={classes.heroButtons}>
