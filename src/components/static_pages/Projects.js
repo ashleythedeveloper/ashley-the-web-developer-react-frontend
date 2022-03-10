@@ -63,6 +63,10 @@ const Projects = () => {
   useEffect(() => {
     axiosInstance.post('project/', {slug: project})
       .then((res) => {
+        const ProjectData = res.data;
+        res.data.modifiedProject = {...res.data.project}
+        res.data.modifiedProjectImages = res.data.projectImages
+        res.data.modifiedProjectTechStack = res.data.projectTechStack
         setProjectData(res.data);
         setLoading({ ...loading, isLoading: false })
       })
@@ -71,12 +75,20 @@ const Projects = () => {
         setLoading({ ...loading, isLoading: false })
       })
   }, []);
-  const handleFormChange = (e) => {
 
-  };
+  const handleFormChange = (e) => {
+    const newProjectData = {...projectData};
+    newProjectData.modifiedProject[e.target.name] = e.target.value;
+    setProjectData(newProjectData);
+  }
+
 
   const handleFormSubmit = (e) => {
-    e.prevenDefault();
+    e.preventDefault();
+    axiosInstance.post('update-project/', projectData, {withCredentials: true})
+    .then((res) => {
+      console.log(res)
+    })
 
   }; 
 
@@ -84,11 +96,11 @@ const Projects = () => {
     let newTechList = []
     for (let i=0; i < projectData.projectTechStack.length; i++) {
       if (projectData.projectTechStack[i].id !== e) {
-        newTechList.push(projectData.projectTechStack[i]);
+        newTechList.push(projectData.modifiedProjectTechStack[i]);
       };
     }
     let newProjectData = {...projectData}
-    newProjectData.projectTechStack = newTechList
+    newProjectData.modifiedProjectTechStack = newTechList
     setProjectData(newProjectData);
   };
 
@@ -96,19 +108,20 @@ const Projects = () => {
     let newProjectData = {...projectData}
 
     if (projectData.project.published) {
-      newProjectData.project.published = false
+      newProjectData.modifiedProject.published = false
     } else {
-      newProjectData.project.published = true
+      newProjectData.modifiedProject.published = true
     }
     setProjectData(newProjectData);
   };
 
   const handleContentUpdate = (content) => {
     let newProjectData = {...projectData}
-    newProjectData.project.content = content;
+    newProjectData.modifiedProject.content = content;
     setProjectData(newProjectData);
     console.log(projectData.project.content)
   } 
+
 
   console.log(projectData)
   if (loading.isLoading) {
@@ -119,15 +132,16 @@ const Projects = () => {
       <Container maxWidth={'md'}>
         <Grid container spacing={2}>
           <Grid item xs={12} className={classes.containerGridItem}>
-            <Box component={'form'} onChange={handleFormChange} onSubmit={handleFormSubmit} className={classes.formField}>
+            <Box component={'form'} onSubmit={handleFormSubmit} className={classes.formField}>
             <Grid item xs={12} className={classes.formGridItem}>
               <Typography variant={'body1'} className={classes.formLabel}>
                 Project Slug
               </Typography>
               <TextField
               fullWidth
+                name={'slug'}
                 variant={'outlined'}
-                value={projectData.project.slug}
+                value={projectData.modifiedProject.slug}
                 onChange={handleFormChange} />
               
             </Grid>
@@ -137,8 +151,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'project_title'}
                 variant={'outlined'}
-                value={projectData.project.project_title}
+                value={projectData.modifiedProject.project_title}
                 onChange={handleFormChange} />
               
             </Grid>
@@ -148,8 +163,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'description'}
                 variant={'outlined'}
-                value={projectData.project.description}
+                value={projectData.modifiedProject.description}
                 onChange={handleFormChange} />
               
             </Grid>
@@ -159,8 +175,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'project_link'}
                 variant={'outlined'}
-                value={projectData.project.project_link}
+                value={projectData.modifiedProject.project_link}
                 onChange={handleFormChange} />
               
             </Grid>
@@ -170,8 +187,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'project_repo'}
                 variant={'outlined'}
-                value={projectData.project.project_repo}
+                value={projectData.modifiedProject.project_repo}
                 onChange={handleFormChange} />
               
             </Grid>
@@ -181,8 +199,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'main_project_image'}
                 variant={'outlined'}
-                value={projectData.project.main_project_image}
+                value={projectData.modifiedProject.main_project_image}
                 onChange={handleFormChange} />
             </Grid>
             <Grid item xs={12} className={classes.formGridItem}>
@@ -191,8 +210,9 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'meta_title'}
                 variant={'outlined'}
-                value={projectData.project.meta_title}
+                value={projectData.modifiedProject.meta_title}
                 onChange={handleFormChange} />
             </Grid>
             <Grid item xs={12} className={classes.formGridItem}>
@@ -201,15 +221,16 @@ const Projects = () => {
               </Typography>
               <TextField
               fullWidth
+              name={'meta_description'}
                 variant={'outlined'}
-                value={projectData.project.meta_description}
+                value={projectData.modifiedProject.meta_description}
                 onChange={handleFormChange} />
             </Grid>
             <Grid item xs={12} className={classes.techStackGridItem}>
               <Typography variant={'body1'} className={classes.formLabel}>
                 Tech Stack
               </Typography>
-                {projectData.projectTechStack.map((tech) => {
+                {projectData.modifiedProjectTechStack.map((tech) => {
                    
                    return <Chip color={'primary'} key={tech.id} label={tech.tech_name} onDelete={(e) => {handleTechChipDelete(tech.id)}} />
 
@@ -223,7 +244,7 @@ const Projects = () => {
                 Published
               </Typography>
               <Switch
-        checked={projectData.project.published}
+        checked={projectData.modifiedProject.published}
         onChange={handleIsPublishedChange}
         color="primary"
         name="isPublished"
@@ -233,8 +254,11 @@ const Projects = () => {
               <Typography variant={'body1'} className={classes.contentLabel}>
                 Content
               </Typography>
-              <TextEditor content={projectData.project.content} updateContent={handleContentUpdate}/>
+              <TextEditor content={projectData.modifiedProject.content} updateContent={handleContentUpdate}/>
             </Grid>
+            <Button variant="contained" color="primary" type={'submit'} >
+              Save Project
+            </Button>
             </Box>
           </Grid>
         </Grid>
