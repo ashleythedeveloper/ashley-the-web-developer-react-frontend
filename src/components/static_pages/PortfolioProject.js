@@ -11,6 +11,7 @@ import axiosInstance from '../global/axiosInstance';
 import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import Dialog from '@material-ui/core/Dialog';
+import ReactMarkdown from "react-markdown";
 
 
 
@@ -140,9 +141,9 @@ const PortfolioProject = () => {
                             </Typography>
                         </Grid>
                         <Grid item xs={10}>
-                            <Typography variant='body2' align='left'>
-                                {projectData.project.content}
-                            </Typography>
+                        <ReactMarkdown>
+                        {projectData.project.content}
+                        </ReactMarkdown>
                         </Grid>
                         <Grid item xs={10}>
                         <Button component='a' href={projectData.project.project_repo} target="_blank" variant="contained" color="primary" className={classes.button}>
