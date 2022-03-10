@@ -119,11 +119,9 @@ const Projects = () => {
     let newProjectData = {...projectData}
     newProjectData.modifiedProject.content = content;
     setProjectData(newProjectData);
-    console.log(projectData.project.content)
   } 
 
 
-  console.log(projectData)
   if (loading.isLoading) {
     return <Loader message={loading.message} />
   } else {
