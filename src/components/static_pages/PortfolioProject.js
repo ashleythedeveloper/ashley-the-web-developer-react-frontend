@@ -43,9 +43,10 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     imageGrid: {
-        paddingLeft: theme.spacing(2),
-        paddingRight: theme.spacing(2),
         paddingTop: theme.spacing(10),
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column'
         
 
     },
@@ -164,16 +165,18 @@ const PortfolioProject = () => {
                                Photos
                             </Typography>
                         </Grid>
-                        <Grid item xs={10}>
-                        <ImageList rowHeight={280} className={classes.imageGrid}>
+                        <Grid item className={classes.imageGrid} align={'center'}>
                         {projectData.projectImages.map((image) => (
                         
-                            
-                                <ImageListItem key={image.id}>
-                                    <img src={image.image_url} alt={projectData.project.project_title} onClick={(src) => handleOpen(image.image_url)} />
-                                </ImageListItem>
+                            <Grid item xs={12} key={image.id}>
+                                    <img 
+                                        srcSet={`https://ashleythewebdeveloper.s3.ap-southeast-2.amazonaws.com/scaled/300/${image.image_url}-300.webp 300w, 
+                                        https://ashleythewebdeveloper.s3.ap-southeast-2.amazonaws.com/scaled/768/${image.image_url}-768.webp 768w`}
+                                        sizes="(max-width: 768px) 180px, 400px"
+                                        alt={projectData.project.project_title} 
+                                         />
+                                </Grid>
                         ))}
-                        </ImageList>
                         </Grid>
                         </Grid>
                 
