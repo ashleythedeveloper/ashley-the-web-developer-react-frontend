@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
+import { markdownToDraft } from 'markdown-draft-js';
 import draftToMarkdown from 'draftjs-to-markdown';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -9,7 +10,8 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 
 const TextEditor = (props) => {
-  const initContentState = ContentState.createFromText(props.content)
+  const rawData = markdownToDraft(props.content)
+  const initContentState = convertFromRaw(rawData)
   const [editorStates, seteditorStates] = useState(EditorState.createWithContent(initContentState))
   // const rawContentState = convertToRaw(editorState.getCurrentContent());
 
