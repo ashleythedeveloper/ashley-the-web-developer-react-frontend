@@ -63,6 +63,7 @@ const Portfolio = () => {
     axiosInstance.get('projects/')
       .then((res) => {
         setProjects(res.data)
+        console.log(res.data)
         setLoading({ ...loading, isLoading: false })
       })
       .catch((err) => {
@@ -94,7 +95,7 @@ const Portfolio = () => {
                     <CardActionArea component={Link} to={'portfolio/' + apiData.slug}>
                       <CardMedia
                         className={classes.media}
-                        image={apiData.main_project_image}
+                        image={`https://ashleythewebdeveloper.s3.ap-southeast-2.amazonaws.com/${apiData.main_project_image}`}
                         title={apiData.project_title}
                       />
                       <CardContent>
