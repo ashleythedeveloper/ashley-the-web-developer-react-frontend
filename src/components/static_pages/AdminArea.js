@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import Grid from '@material-ui/core/Grid';
+import React, {useState, useEffect} from 'react';
+import { useHistory } from 'react-router-dom';
+import axiosInstance from '../global/axiosInstance';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
@@ -14,13 +14,27 @@ import DisplayCardGrid from '../global/DisplayCardGrid';
 const useStyles = makeStyles((theme) => ({
   rootContainer: {
     marginTop: theme.spacing(10)
+  },
+  cardContainer: {
+    paddingBottom: theme.spacing(10)
   }
 }))
 
 const AdminArea = () => {
+  const history = useHistory();
   const classes = useStyles();
 
   const [tabState, setTabState] = useState(0);
+
+  useEffect(() => {
+    axiosInstance.get('auth/is-user/', {withCredentials: true})
+    .then((res) => {
+      console.log("Logged in")
+    })
+    .catch((err) => {
+      history.push('/login')
+    })
+  }, [])
 
   const handleTabChange = (event, newValue) => {
     setTabState(newValue);
@@ -32,7 +46,7 @@ const AdminArea = () => {
     <Container maxWidth={'md'} className={classes.rootContainer}>
       
       <Box>
-      <Card raised>
+      <Card raised className={classes.cardContainer}>
         <Tabs value={tabState} onChange={handleTabChange} indicatorColor={'primary'}>
           <Tab label={'Pages'} />
           <Tab label={'Projects'} />
