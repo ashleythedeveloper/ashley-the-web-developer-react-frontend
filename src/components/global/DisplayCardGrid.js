@@ -71,10 +71,10 @@ const DisplayCardGrid = (props) => {
               return (
                 <Grid item key={apiData.project_title} xs={12} md={6} lg={4} align='center'>
                   <Card raised className={classes.item}>
-                    <CardActionArea component={Link} to={'portfolio/' + apiData.slug}>
+                    <CardActionArea component={Link} to={`/admin-area/project/${apiData.slug}`}>
                       <CardMedia
                         className={classes.media}
-                        image={apiData.main_project_image}
+                        image={`https://ashleythewebdeveloper.s3.ap-southeast-2.amazonaws.com/${apiData.main_project_image}`}
                         title={apiData.project_title}
                       />
                       <CardContent>
@@ -87,8 +87,11 @@ const DisplayCardGrid = (props) => {
                       </CardContent>
                     </CardActionArea>
                     <CardActions className={classes.cardButtonArea}>
-                      <Button size="small" variant='contained' color="primary" component={Link} to={'portfolio/' + apiData.slug}>
-                        Learn More
+                      <Button size="small" variant='contained' color="primary" component={Link} to={`/admin-area/project/${apiData.slug}`}>
+                        Edit Project
+                </Button>
+                <Button size="small" variant='contained' color="secondary" component={Link} to={'#'}>
+                        Delete Project
                 </Button>
                     </CardActions>
                   </Card>
