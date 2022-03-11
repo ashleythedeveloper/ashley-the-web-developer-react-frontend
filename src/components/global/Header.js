@@ -21,6 +21,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import Cookies from 'js-cookie';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -135,6 +136,9 @@ const Header = () => {
   else{
     desktop=
     <>
+    <Link to="/admin-area" className={classes.link}>
+    <Button color="primary" variant="contained" >Dashboard</Button>
+    </Link>
     <Link to="/logout" className={classes.link}>
     <Button color="primary" variant="outlined" >Logout</Button>
     </Link>
@@ -142,6 +146,12 @@ const Header = () => {
 
     mobile =
     <>
+    <ListItem button component={ Link } to='/admin-area' onClick={handleDrawClose}>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard"/>
+            </ListItem>
             <ListItem button component={ Link } to='/logout' onClick={handleDrawClose}>
               <ListItemIcon>
                 <AccountBoxIcon />
