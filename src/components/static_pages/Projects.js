@@ -72,9 +72,6 @@ const Projects = () => {
         setLoading({ ...loading, isLoading: false })
       })
       .catch((err) => {
-        if (err.response.status === 401){
-          history.push('/login')
-        }
         console.log(err)
         setLoading({ ...loading, isLoading: false })
       })
@@ -92,6 +89,11 @@ const Projects = () => {
     axiosInstance.post('update-project/', projectData, {withCredentials: true})
     .then((res) => {
       console.log(res)
+    })
+    .catch((err) => {
+      if (err.response.status === 401){
+        history.push('/login')
+      }
     })
 
   }; 
