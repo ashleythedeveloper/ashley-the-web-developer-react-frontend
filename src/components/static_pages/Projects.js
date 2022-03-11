@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axiosInstance from '../global/axiosInstance';
 import Loader from '../global/Loader';
 import Grid from '@material-ui/core/Grid';
@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Projects = () => {
+  const history = useHistory();
   const { project } = useParams();
 
   const classes = useStyles();
@@ -71,6 +72,9 @@ const Projects = () => {
         setLoading({ ...loading, isLoading: false })
       })
       .catch((err) => {
+        if (err.response.status === 401){
+          history.push('/login')
+        }
         console.log(err)
         setLoading({ ...loading, isLoading: false })
       })
