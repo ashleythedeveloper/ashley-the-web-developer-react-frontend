@@ -62,7 +62,7 @@ const Projects = () => {
 
 
   useEffect(() => {
-    axiosInstance.post('project/', {slug: project})
+    axiosInstance.post('users-project/', {slug: project})
       .then((res) => {
         const ProjectData = res.data;
         res.data.modifiedProject = {...res.data.project}
@@ -72,8 +72,9 @@ const Projects = () => {
         setLoading({ ...loading, isLoading: false })
       })
       .catch((err) => {
-        console.log(err)
-        setLoading({ ...loading, isLoading: false })
+        if (err.response.status === 401) {
+          history.push('/login')
+        }
       })
   }, []);
 
@@ -86,9 +87,10 @@ const Projects = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setLoading({ loadingMessage: "Saving project. One moment.", isLoading: true })
     axiosInstance.post('update-project/', projectData, {withCredentials: true})
     .then((res) => {
-      console.log(res)
+      setLoading({ ...loading, isLoading: false })
     })
     .catch((err) => {
       if (err.response.status === 401){
@@ -129,7 +131,7 @@ const Projects = () => {
 
 
   if (loading.isLoading) {
-    return <Loader message={loading.message} />
+    return <Loader message={loading.loadingMessage} />
   } else {
     return (
       <>
