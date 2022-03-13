@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 
 const DisplayCardGrid = (props) => {
 
-  console.log(props)
   const [projects, setProjects] = useState(props.data)
 
   const classes = useStyles();

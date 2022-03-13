@@ -63,7 +63,6 @@ const Portfolio = () => {
     axiosInstance.get('projects/')
       .then((res) => {
         setProjects(res.data)
-        console.log(res.data)
         setLoading({ ...loading, isLoading: false })
       })
       .catch((err) => {
