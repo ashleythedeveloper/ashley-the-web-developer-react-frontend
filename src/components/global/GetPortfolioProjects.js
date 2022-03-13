@@ -16,7 +16,6 @@ const GetPortfolioProjects = (props) => {
     })
   }, [])
 
-  console.log(portfolioProjects)
   const returnChildrenWithProps = React.Children.map( props.children, (child) => {
     if (isValidElement(child)) {
       return cloneElement(child, portfolioProjects)
