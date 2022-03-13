@@ -29,7 +29,6 @@ const AdminArea = () => {
   useEffect(() => {
     axiosInstance.get('auth/is-user/', {withCredentials: true})
     .then((res) => {
-      console.log("Logged in")
     })
     .catch((err) => {
       history.push('/login')
