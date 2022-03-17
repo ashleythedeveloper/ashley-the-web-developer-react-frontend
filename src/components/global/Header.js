@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton'
@@ -96,10 +96,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
+  const location = useLocation();
 
   const [drawState, setDrawState] = useState(false);
-  const cookie = Cookies.get('is-logged-in');
-  const isLoggedIn = cookie ? cookie : 'false';
+
+
+  const [isLoggedIn, setIsLoggedIn] = useState('false')
+  
+  useEffect(() => {
+    setIsLoggedIn(Cookies.get('is-logged-in'));
+  }, [location])
 
   const handleDrawOpen = () => {
     setDrawState(true);
