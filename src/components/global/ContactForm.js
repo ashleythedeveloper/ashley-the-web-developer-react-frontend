@@ -71,7 +71,7 @@ const ContactForm = ({ setLoading, loading }) => {
 
     return (
         <form className={classes.contactForm} name="contactForm" onChange={handleFormChange} onSubmit={handleFormSubmit}>
-            <Grid container justify='center' spacing={2} className={classes.formContainer}>
+            <Grid container justifyContent='center' spacing={2} className={classes.formContainer}>
                 <Grid item xs={11} sm={8} lg={4}>
                     <TextField
                         className={classes.formFields}
