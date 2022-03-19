@@ -104,7 +104,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState('false')
   
   useEffect(() => {
-    setIsLoggedIn(Cookies.get('is-logged-in'));
+    const cookieStatus = Cookies.get('is-logged-in');
+    setIsLoggedIn(cookieStatus ? cookieStatus : 'false');
   }, [location])
 
   const handleDrawOpen = () => {
