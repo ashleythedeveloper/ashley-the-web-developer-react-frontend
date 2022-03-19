@@ -153,45 +153,45 @@ const Signup = () => {
             });
           } else {
             // Checks the errors response object if the error was caused because the user exists
-            if (err.response.data.errorType === "User Exists") {
+            if (err.response.data.message.errorType === "User Exists") {
               // Checks if the error was raised because of a matching username. 
               // If so, display the alert box along with the appropiate message and username field highlighted (error).
-              if (err.response.data.errorField === "Username") {
+              if (err.response.data.message.errorField === "Username") {
                 setNotifications({
-                  notificationType: err.response.data.notificationType,
-                  notificationTitle: err.response.data.notificationTitle,
-                  notificationMessage: err.response.data.notificationMessage,
+                  notificationType: err.response.data.message.notificationType,
+                  notificationTitle: err.response.data.message.notificationTitle,
+                  notificationMessage: err.response.data.message.notificationMessage,
                   notificationTimer: null
                 });
-                setFormFieldErrors({ ...formFieldErrors, username: true });
+                setFormFieldErrors({ ...defaultFormFieldErrorState, username: true });
               } else {
                 // If the previous check failed it was because the email matches an existing user.
                 // Display the alert box along with the appropiate message and email field highlighted (error).
                 setNotifications({
-                  notificationType: err.response.data.notificationType,
-                  notificationTitle: err.response.data.notificationTitle,
-                  notificationMessage: err.response.data.notificationMessage,
+                  notificationType: err.response.data.message.notificationType,
+                  notificationTitle: err.response.data.message.notificationTitle,
+                  notificationMessage: err.response.data.message.notificationMessage,
                   notificationTimer: null
                 });
-                setFormFieldErrors({ ...formFieldErrors, email: true });
+                setFormFieldErrors({ ...defaultFormFieldErrorState, email: true });
               }
-            } else if (err.response.data.errorType === "Password") {
+            } else if (err.response.data.message.errorType === "Password") {
               // Check if the error was produced because of an invalid password (shorter than 8 charaters).
               // Display the alert box along with the appropiate message and both password fields highlighted (error).
               setNotifications({
-                notificationType: err.response.data.notificationType,
-                notificationTitle: err.response.data.notificationTitle,
-                notificationMessage: err.response.data.notificationMessage,
+                notificationType: err.response.data.message.notificationType,
+                notificationTitle: err.response.data.message.notificationTitle,
+                notificationMessage: err.response.data.message.notificationMessage,
                 notificationTimer: null
               });
-              setFormFieldErrors({ ...formFieldErrors, password: true, password2: true });
+              setFormFieldErrors({ ...defaultFormFieldErrorState, password: true, password2: true });
             } else {
               // The error has been caused by an error creating the user on the backend.
               // Display the alert box along with the appropiate message.
               setNotifications({
-                notificationType: err.response.data.notificationType,
-                notificationTitle: err.response.data.notificationTitle,
-                notificationMessage: err.response.data.notificationMessage,
+                notificationType: err.response.data.message.notificationType,
+                notificationTitle: err.response.data.message.notificationTitle,
+                notificationMessage: err.response.data.message.notificationMessage,
                 notificationTimer: null
               });
             };
