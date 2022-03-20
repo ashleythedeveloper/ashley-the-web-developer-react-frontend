@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, convertFromRaw, ContentState } from 'draft-js';
-import { markdownToDraft } from 'markdown-draft-js';
-import draftToMarkdown from 'draftjs-to-markdown';
+import { markdownToDraft, draftToMarkdown } from 'markdown-draft-js';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button'
